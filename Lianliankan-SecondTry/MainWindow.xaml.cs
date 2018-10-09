@@ -23,6 +23,26 @@ namespace Lianliankan_SecondTry
         public MainWindow()
         {
             InitializeComponent();
+            List<RankInfo> rankInfos = new List<RankInfo>
+            {
+                new RankInfo{Rank = 1,Mark = 3000,CompleteTime=DateTime.Now},
+                new RankInfo{Rank=2,Mark=2800,CompleteTime=DateTime.Now.AddDays(10) },
+                new RankInfo{Rank=3,Mark=500,CompleteTime=DateTime.MaxValue }
+            };
+            this.lvRank.ItemsSource = rankInfos;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            GameWindow gameWindow = new GameWindow();
+            this.Hide();
+            gameWindow.Show();
+        }
+    }
+    class RankInfo
+    {
+        public int Rank { get; set; }
+        public int Mark { get; set; }
+        public DateTime CompleteTime { get; set; }
     }
 }
