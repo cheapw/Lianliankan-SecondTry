@@ -34,7 +34,9 @@ namespace Lianliankan_SecondTry
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            GameWindow gameWindow = new GameWindow();
+            this.Hide();
+            gameWindow.Show();
         }
     }
     class RankInfo
