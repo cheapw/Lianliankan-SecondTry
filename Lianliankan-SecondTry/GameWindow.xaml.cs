@@ -21,6 +21,10 @@ namespace Lianliankan_SecondTry
     {
         List<ImageInfo> allImageInfoNeededRandomly = null;
         List<ImageInfo> allImageInfoNeeded = null;
+        ImageInfo[,] imageInfoArray = null;
+        bool isFirstButtonClicked = false;
+        Button currentClickedButton = null;
+        bool[,] availableChannels = null;
 
         #region 将图片随机添加到用户界面，并记录图片的位置
         private List<ImageInfo> GetImageInfoList()
@@ -128,7 +132,76 @@ namespace Lianliankan_SecondTry
             return imageInfo;
         }
         #endregion
-
+        #region 配对消除
+        private int GetMaxRow(List<Button> buttons)
+        {
+            return Grid.GetRow(buttons[buttons.Count - 1]);
+        }
+        private int GetMaxColumn(List<Button> buttons)
+        {
+            return Grid.GetColumn(buttons[buttons.Count - 1]);
+        }
+        private void FillImageInfoArray()
+        {
+            List<Button> buttons = GetButtonList();
+            int maxRow = GetMaxRow(buttons);
+            int maxColumn = GetMaxColumn(buttons);
+            imageInfoArray = new ImageInfo[maxRow+1, maxColumn+1];
+            int index = 0;
+            for (int i = 0; i < maxRow+1; i++)
+            {
+                for (int j = 0; j < maxColumn+1; j++)
+                {
+                    imageInfoArray[i, j] = allImageInfoNeeded[index];
+                    index++;
+                }
+            }
+        }
+        private int GetRow(Button button)
+        {
+            int row = 0;
+            if (button.Parent is Grid)
+            {
+                row = Grid.GetRow(button);
+            }
+            else
+            {
+                throw new Exception("改按钮的容器控件不是Grid，无法获取其所在的行！");
+            }
+            return row;
+        }
+        private int GetColumn(Button button)
+        {
+            int column = 0;
+            if (button.Parent is Grid)
+            {
+                column = Grid.GetColumn(button);
+            }
+            else
+            {
+                throw new Exception("改按钮的容器控件不是Grid，无法获取其所在的列！");
+            }
+            return column;
+        }
+        private void FillAvailableChannels()
+        {
+            List<Button> buttons = GetButtonList();
+            int row = GetMaxRow(buttons) + 3;
+            int column = GetMaxColumn(buttons) + 3;
+            availableChannels = new bool[row, column];
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    if (i == 0 || i == row - 1 || j == 0 || j == column - 1)
+                    {
+                        availableChannels[i, j] = true;
+                    }
+                    else availableChannels[i, j] = false;
+                }
+            }
+        }
+        #endregion
 
 
         public GameWindow()
@@ -139,13 +212,57 @@ namespace Lianliankan_SecondTry
             List<ImageInfo> doubleImageInfo = GetDoubleImageInfoList(imageInfos);
             List<Button> buttons = GetButtonList();
             AddImageToUIRandomly(doubleImageInfo, imageInfos, GetRanomIndexList, buttons);
+            FillImageInfoArray();
+            FillAvailableChannels();
+            
 
+            foreach (var item in buttons)
+            {
+                item.Click += Item_Click;
+            }
             //StringBuilder stringBuilder = new StringBuilder();
             //foreach (var item in allImageInfoNeeded)
             //{
             //    stringBuilder.Append(item.Row.ToString() + "X" + item.Column.ToString() + "\n");
             //}
             //MessageBox.Show(stringBuilder.ToString());
+        }
+
+        private void Item_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (!isFirstButtonClicked)
+            {
+                isFirstButtonClicked = true;
+                button.Background = new SolidColorBrush(Colors.Green);
+                currentClickedButton = button;
+            }
+            else
+            {
+                if (button ==currentClickedButton)
+                {
+                    button.Background = new SolidColorBrush(Colors.Red);
+                    currentClickedButton = null;
+                    isFirstButtonClicked = false;
+                }
+                else
+                {
+                    ImageInfo previousImageInfo = imageInfoArray[GetRow(currentClickedButton), GetColumn(currentClickedButton)];
+                    ImageInfo currentImageInfo = imageInfoArray[GetRow(button), GetColumn(button)];
+                    if (previousImageInfo.Id==currentImageInfo.Id)
+                    {
+
+
+
+                        currentClickedButton.Background = new SolidColorBrush(Colors.Transparent);
+                        button.Background = new SolidColorBrush(Colors.Transparent);
+                        currentClickedButton.IsEnabled = false;
+                        button.IsEnabled = false;
+                        currentClickedButton = null;
+                        isFirstButtonClicked = false;
+                    }
+                }
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
