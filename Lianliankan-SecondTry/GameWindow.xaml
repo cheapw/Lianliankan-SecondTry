@@ -5,8 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lianliankan_SecondTry"
         mc:Ignorable="d"
-        Title="GameWindow" Height="450" Width="800" Closed="Window_Closed">
+        Title="GameWindow" Height="450" Width="600" Closed="Window_Closed">
+    <Window.Resources>
+        <ImageBrush x:Key="image1_FullColor" ImageSource="/Resources/Images/aperture.png"/>
+        <ImageBrush x:Key="image1_OneColor" ImageSource="/Resources/Images/aperture_OneColor.png"/>
+        <ImageBrush x:Key="image2_FullColor" ImageSource="/Resources/Images/bike.png"/>
+        <ImageBrush x:Key="image2_OneColor" ImageSource="/Resources/Images/bike_OneColor.png"/>
+        <ImageBrush x:Key="image3_FullColor" ImageSource="/Resources/Images/gear.png"/>
+        <ImageBrush x:Key="image3_OneColor" ImageSource="/Resources/Images/gear_OneColor.png"/>
+        <ImageBrush x:Key="image4_FullColor" ImageSource="/Resources/Images/key.png"/>
+        <ImageBrush x:Key="image4_OneColor" ImageSource="/Resources/Images/key_OneColor.png"/>
+        <ImageBrush x:Key="image5_FullColor" ImageSource="/Resources/Images/mail.png"/>
+        <ImageBrush x:Key="image5_OneColor" ImageSource="/Resources/Images/mail_OneColor.png"/>
+        <ImageBrush x:Key="image6_FullColor" ImageSource="/Resources/Images/rocket.png"/>
+        <ImageBrush x:Key="image6_OneColor" ImageSource="/Resources/Images/rocket_OneColor.png"/>
+        <ImageBrush x:Key="image7_FullColor" ImageSource="/Resources/Images/scissors.png"/>
+        <ImageBrush x:Key="image7_OneColor" ImageSource="/Resources/Images/scissors_OneColor.png"/>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Row="0" Grid.Column="0"/>
+        <Button Grid.Row="0" Grid.Column="1"/>
+        <Button Grid.Row="0" Grid.Column="2"/>
+        <Button Grid.Row="0" Grid.Column="3"/>
+        <Button Grid.Row="0" Grid.Column="4"/>
+        <Button Grid.Row="0" Grid.Column="5"/>
+
+        <Button Grid.Row="1" Grid.Column="0"/>
+        <Button Grid.Row="1" Grid.Column="1"/>
+        <Button Grid.Row="1" Grid.Column="2"/>
+        <Button Grid.Row="1" Grid.Column="3"/>
+        <Button Grid.Row="1" Grid.Column="4"/>
+        <Button Grid.Row="1" Grid.Column="5"/>
+
+        <Button Grid.Row="2" Grid.Column="0"/>
+        <Button Grid.Row="2" Grid.Column="1"/>
+        <Button Grid.Row="2" Grid.Column="2"/>
+        <Button Grid.Row="2" Grid.Column="3"/>
+        <Button Grid.Row="2" Grid.Column="4"/>
+        <Button Grid.Row="2" Grid.Column="5"/>
+
+        <Button Grid.Row="3" Grid.Column="0"/>
+        <Button Grid.Row="3" Grid.Column="1"/>
+        <Button Grid.Row="3" Grid.Column="2"/>
+        <Button Grid.Row="3" Grid.Column="3"/>
+        <Button Grid.Row="3" Grid.Column="4"/>
+        <Button Grid.Row="3" Grid.Column="5"/>
+
+        <Button Grid.Row="4" Grid.Column="0"/>
+        <Button Grid.Row="4" Grid.Column="1"/>
+        <Button Grid.Row="4" Grid.Column="2"/>
+        <Button Grid.Row="4" Grid.Column="3"/>
+        <Button Grid.Row="4" Grid.Column="4"/>
+        <Button Grid.Row="4" Grid.Column="5"/>
+
+        <Button Grid.Row="5" Grid.Column="0"/>
+        <Button Grid.Row="5" Grid.Column="1"/>
+        <Button Grid.Row="5" Grid.Column="2"/>
+        <Button Grid.Row="5" Grid.Column="3"/>
+        <Button Grid.Row="5" Grid.Column="4"/>
+        <Button Grid.Row="5" Grid.Column="5"/>
     </Grid>
 </Window>

@@ -101,5 +101,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\aperture.png" />
+    <Resource Include="Resources\Images\aperture_OneColor.png" />
+    <Resource Include="Resources\Images\bike.png" />
+    <Resource Include="Resources\Images\bike_OneColor.png" />
+    <Resource Include="Resources\Images\gear.png" />
+    <Resource Include="Resources\Images\gear_OneColor.png" />
+    <Resource Include="Resources\Images\key.png" />
+    <Resource Include="Resources\Images\key_OneColor.png" />
+    <Resource Include="Resources\Images\mail.png" />
+    <Resource Include="Resources\Images\mail_OneColor.png" />
+    <Resource Include="Resources\Images\rocket.png" />
+    <Resource Include="Resources\Images\rocket_OneColor.png" />
+    <Resource Include="Resources\Images\scissors.png" />
+    <Resource Include="Resources\Images\scissors_OneColor.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
