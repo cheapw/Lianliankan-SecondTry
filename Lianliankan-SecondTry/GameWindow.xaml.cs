@@ -19,6 +19,7 @@ namespace Lianliankan_SecondTry
     /// </summary>
     public partial class GameWindow : Window
     {
+        List<ImageInfo> allImageInfoNeededRandomly = null;
         List<ImageInfo> allImageInfoNeeded = null;
 
         #region 将图片随机添加到用户界面，并记录图片的位置
@@ -62,13 +63,13 @@ namespace Lianliankan_SecondTry
             {
                 temp.Add(i);
             }
-            int substractIndex = count;
+            int subtractIndex = count;
             for (int i = 0; i < count; i++)
             {
-                int randNum=rand.Next(substractIndex);
+                int randNum=rand.Next(subtractIndex);
                 randomIndexList.Add(temp[randNum]);
                 temp.Remove(temp[randNum]);
-                substractIndex--;
+                subtractIndex--;
             }
             return randomIndexList;
         }
@@ -96,26 +97,28 @@ namespace Lianliankan_SecondTry
                 LeftoverImageNeeded.Add(imageInfos[randLeftoverImageIndex[i]]);
             }
 
-            allImageInfoNeeded = new List<ImageInfo>();
+            allImageInfoNeededRandomly = new List<ImageInfo>();
 
             for (int i = 0; i < addRounds; i++)
             {
                 for (int j = 0; j < doubleImageInfos.Count; j++)
                 {
-                    allImageInfoNeeded.Add(doubleImageInfos[j]);
+                    allImageInfoNeededRandomly.Add(doubleImageInfos[j]);
                 }
             }
 
             for (int i = 0; i < LeftoverImageNeeded.Count; i++)
             {
-                allImageInfoNeeded.Add(LeftoverImageNeeded[i]);
+                allImageInfoNeededRandomly.Add(LeftoverImageNeeded[i]);
             }
 
-            List<int> allRandomIndex = GetRandomIndexListCallback(allImageInfoNeeded.Count);
-            for (int i = 0; i < allImageInfoNeeded.Count; i++)
+            List<int> allRandomIndex = GetRandomIndexListCallback(allImageInfoNeededRandomly.Count);
+            allImageInfoNeeded = new List<ImageInfo>();
+            for (int i = 0; i < allImageInfoNeededRandomly.Count; i++)
             {
-                buttons[i].Background = allImageInfoNeeded[allRandomIndex[i]].Image;
-                allImageInfoNeeded[allRandomIndex[i]]=SetLocation(buttons[i],allImageInfoNeeded[allRandomIndex[i]]);
+                buttons[i].Background = allImageInfoNeededRandomly[allRandomIndex[i]].Image;
+                allImageInfoNeededRandomly[allRandomIndex[i]]=SetLocation(buttons[i],allImageInfoNeededRandomly[allRandomIndex[i]]);
+                allImageInfoNeeded.Add(SetLocation(buttons[i], allImageInfoNeededRandomly[allRandomIndex[i]]));
             }
         }
         private ImageInfo SetLocation(Button button,ImageInfo imageInfo)
@@ -125,15 +128,13 @@ namespace Lianliankan_SecondTry
             return imageInfo;
         }
         #endregion
+
+
+
         public GameWindow()
         {
             InitializeComponent();
-            //StringBuilder stringBuilder = new StringBuilder();
-            //foreach (var item in GetRanomIndexList(5))
-            //{
-            //    stringBuilder.Append(item.ToString() + "  ");
-            //}
-            //MessageBox.Show(stringBuilder.ToString());
+
             List<ImageInfo> imageInfos=GetImageInfoList();
             List<ImageInfo> doubleImageInfo = GetDoubleImageInfoList(imageInfos);
             List<Button> buttons = GetButtonList();
@@ -142,7 +143,7 @@ namespace Lianliankan_SecondTry
             //StringBuilder stringBuilder = new StringBuilder();
             //foreach (var item in allImageInfoNeeded)
             //{
-            //    stringBuilder.Append(item.Row.ToString() + "X"+item.Column.ToString()+"\n");
+            //    stringBuilder.Append(item.Row.ToString() + "X" + item.Column.ToString() + "\n");
             //}
             //MessageBox.Show(stringBuilder.ToString());
         }
@@ -152,15 +153,7 @@ namespace Lianliankan_SecondTry
             Application.Current.MainWindow.Close();
         }
     }
-    //class ImageInfo
-    //{
-    //    public ImageBrush Image { get; set; }
-    //    //public int Row { get; set; }
-    //    //public int Column { get; set; }
-    //    //public Point Location { get; set; }
-    //    public List<Point> LocationList { get; set; }
-    //    public int Id { get; set; }
-    //}
+
     struct ImageInfo
     {
         public int Id { get; set; }
