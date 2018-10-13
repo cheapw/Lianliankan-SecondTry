@@ -23,7 +23,7 @@ namespace Lianliankan_SecondTry
         List<ImageInfo> allImageInfoNeeded = null;
         ImageInfo[,] imageInfoArray = null;
         bool isFirstButtonClicked = false;
-        Button currentClickedButton = null;
+        Button previousClickedButton = null;
         bool[,] availableChannels = null;
 
         #region 将图片随机添加到用户界面，并记录图片的位置
@@ -201,6 +201,32 @@ namespace Lianliankan_SecondTry
                 }
             }
         }
+        private bool UnderSameLineOperate(Button previousButton,Button currentButton)
+        {
+            bool judge = false;
+
+            int preRow = GetRow(previousButton);
+            int preColumn = GetColumn(previousButton);
+            int curRow = GetRow(currentButton);
+            int curColumn = GetColumn(currentButton);
+
+            if (Math.Abs(preColumn - curColumn) == 1 || Math.Abs(preRow-curRow)==1)
+            {
+                // 两个按钮相邻， 可以直接消除
+                judge = true;
+            }
+            else if (preRow==curRow)
+            {
+                if (preColumn>curColumn)
+                {
+                    for (int i = 0; i < preColumn+2; i++)
+                    {
+
+                    }
+                }
+            }
+            return judge;
+        }
         #endregion
 
 
@@ -235,31 +261,38 @@ namespace Lianliankan_SecondTry
             {
                 isFirstButtonClicked = true;
                 button.Background = new SolidColorBrush(Colors.Green);
-                currentClickedButton = button;
+                previousClickedButton = button;
             }
             else
             {
-                if (button ==currentClickedButton)
+                if (button ==previousClickedButton)
                 {
                     button.Background = new SolidColorBrush(Colors.Red);
-                    currentClickedButton = null;
+                    previousClickedButton = null;
                     isFirstButtonClicked = false;
                 }
                 else
                 {
-                    ImageInfo previousImageInfo = imageInfoArray[GetRow(currentClickedButton), GetColumn(currentClickedButton)];
+                    ImageInfo previousImageInfo = imageInfoArray[GetRow(previousClickedButton), GetColumn(previousClickedButton)];
                     ImageInfo currentImageInfo = imageInfoArray[GetRow(button), GetColumn(button)];
                     if (previousImageInfo.Id==currentImageInfo.Id)
                     {
+                        if (UnderSameLineOperate(previousClickedButton, button))
+                        {
+                            availableChannels[GetRow(previousClickedButton) + 1, GetColumn(previousClickedButton) + 1] = true;
+                            availableChannels[GetRow(button) + 1, GetColumn(button) + 1] = true;
+
+                            previousClickedButton.Background = new SolidColorBrush(Colors.Transparent);
+                            button.Background = new SolidColorBrush(Colors.Transparent);
+                            previousClickedButton.IsEnabled = false;
+                            button.IsEnabled = false;
+                            previousClickedButton = null;
+                            isFirstButtonClicked = false;
+                        }
+                        
 
 
-
-                        currentClickedButton.Background = new SolidColorBrush(Colors.Transparent);
-                        button.Background = new SolidColorBrush(Colors.Transparent);
-                        currentClickedButton.IsEnabled = false;
-                        button.IsEnabled = false;
-                        currentClickedButton = null;
-                        isFirstButtonClicked = false;
+                        
                     }
                 }
             }
