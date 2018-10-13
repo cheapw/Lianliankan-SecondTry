@@ -201,7 +201,7 @@ namespace Lianliankan_SecondTry
                 }
             }
         }
-        private bool UnderSameLineOperate(Button previousButton,Button currentButton)
+        private bool CheckIfMatch(Button previousButton,Button currentButton)
         {
             bool judge = false;
 
@@ -210,21 +210,154 @@ namespace Lianliankan_SecondTry
             int curRow = GetRow(currentButton);
             int curColumn = GetColumn(currentButton);
 
-            if (Math.Abs(preColumn - curColumn) == 1 || Math.Abs(preRow-curRow)==1)
-            {
-                // 两个按钮相邻， 可以直接消除
-                judge = true;
-            }
-            else if (preRow==curRow)
-            {
-                if (preColumn>curColumn)
-                {
-                    for (int i = 0; i < preColumn+2; i++)
-                    {
+            int availableRows = GetMaxRow(GetButtonList()) + 3;
+            int availableColumns = GetMaxColumn(GetButtonList()) + 3;
 
-                    }
-                }
+            // 如果两个按钮处在同一行或同一列且相邻的话，直接返回true
+            if (preRow==curRow&&Math.Abs(preColumn-curColumn)==1)
+            {
+                return true;
             }
+            if (preColumn==curColumn&&Math.Abs(preRow-curRow)==1)
+            {
+                return true;
+            }
+
+            #region 弃用代码
+            //if (preRow==curRow)
+            //{
+            //    if (Math.Abs(preColumn - curColumn)==1)
+            //    {
+            //        // 两个按钮相邻， 可以直接消除
+            //        return true;
+            //    }
+            //    if (preColumn>curColumn)
+            //    {
+            //        for (int i = 0; i < availableRows; i++)
+            //        {
+            //            for (int j = 0; j < preColumn-curColumn+1; j++)
+            //            {
+            //                if (i== preRow+1&& j == 0)
+            //                {
+            //                    continue;
+            //                }
+            //                if (i==preRow+1&& j == preColumn - curColumn)
+            //                {
+            //                    return true;
+            //                }
+            //                if (j== preColumn - curColumn&& availableChannels[i, j + curColumn + 1])
+            //                {
+            //                    if (i < preRow + 1)
+            //                    {
+            //                        for (int k = 1; k < preRow + 1 - i; k++)
+            //                        {
+            //                            if ((!availableChannels[k, preColumn + 1]) || (!availableChannels[k,curRow+1]))
+            //                            {
+            //                                break;
+            //                            }
+            //                        }
+            //                    }
+            //                    if (i>preRow+1)
+            //                    {
+            //                        for (int i = 0; i < length; i++)
+            //                        {
+
+            //                        }
+            //                    }
+            //                    return true;
+            //                }
+            //                if (!availableChannels[i,j+curColumn+1])
+            //                {
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        for (int i = 0; i < availableRows; i++)
+            //        {
+            //            for (int j = 0; j < curColumn - preColumn + 1; j++)
+            //            {
+            //                if (i == curRow + 1 && j == 0)
+            //                {
+            //                    continue;
+            //                }
+            //                if (i==curRow+1&&j==curColumn-preColumn)
+            //                {
+            //                    return true;
+            //                }
+            //                if (j == curColumn - preColumn && availableChannels[i, j + preColumn + 1])
+            //                {
+            //                    return true;
+            //                }
+            //                if (!availableChannels[i, j + preColumn + 1])
+            //                {
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+            //if (preColumn==curColumn)
+            //{
+            //    if (Math.Abs(preRow - curRow) == 1)
+            //    {
+            //        // 两个按钮相邻， 可以直接消除
+            //        return true;
+            //    }
+            //    if (preRow > curRow)
+            //    {
+            //        for (int i = 0; i < availableColumns; i++)
+            //        {
+            //            for (int j = 0; j < preRow - curRow + 1; j++)
+            //            {
+            //                if (i == preColumn + 1 && j == 0)
+            //                {
+            //                    continue;
+            //                }
+            //                if (i==preColumn+1&&j==preRow-curRow)
+            //                {
+            //                    return true;
+            //                }
+            //                if (j == preRow - curRow && availableChannels[i, j + curRow + 1])
+            //                {
+            //                    return true;
+            //                }
+            //                if (!availableChannels[i, j + curRow + 1])
+            //                {
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        for (int i = 0; i < availableColumns; i++)
+            //        {
+            //            for (int j = 0; j < curRow - preRow + 1; j++)
+            //            {
+            //                if (i == curColumn + 1 && (j == 0 || j == curRow - preRow))
+            //                {
+            //                    continue;
+            //                }
+            //                if (i==curColumn+1 && j==curRow-preRow)
+            //                {
+            //                    return true;
+            //                }
+            //                if (j == curRow - preRow && availableChannels[i, j + preRow + 1])
+            //                {
+            //                    return true;
+            //                }
+            //                if (!availableChannels[i, j + preRow + 1])
+            //                {
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+            #endregion
             return judge;
         }
         #endregion
