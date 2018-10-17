@@ -1299,6 +1299,528 @@ namespace Lianliankan_SecondTry
                 }
             }
 
+
+            // 4.2.1 先前点击的按钮在当前按钮的右下方
+            if (preRow - curRow >= 1 && preColumn - curColumn >= 1)
+            {
+                // 尝试在两按钮上方查找连通通道
+                if (availableChannels[curRow + 1, preColumn + 1])
+                {
+                    for (int i = 0; i < preColumn - curColumn - 1; i++)
+                    {
+                        if (availableChannels[curRow + 1, i + curColumn + 2] && i + curColumn + 2 == preColumn)
+                        {
+                            for (int j = 0; j < preRow - curRow - 1; j++)
+                            {
+                                if (availableChannels[j + curRow + 2, preColumn + 1] && j + curRow + 2 == preRow)
+                                {
+                                    return true;
+                                }
+                                if (!availableChannels[j + curRow + 2, preColumn + 1])
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        if (!availableChannels[curRow + 1, i + curColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续向上
+                    for (int i = 0; i < curRow + 1; i++)
+                    {
+                        if ((!availableChannels[curRow - i, preColumn + 1]) || (!availableChannels[curRow - i, curColumn + 1]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < preColumn - curColumn - 1; j++)
+                            {
+                                if (!availableChannels[curRow - i, j + curColumn + 2])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[curRow - i, j + curColumn + 2] && j + 1 + curColumn + 1 == preColumn)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                    // 继续向右
+                    for (int i = preColumn + 2; i < availableRows; i++)
+                    {
+                        if ((!availableChannels[preRow + 1, i]) || (!availableChannels[curRow + 1, i]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < preRow - curRow - 1; j++)
+                            {
+                                if (!availableChannels[j + curRow + 2, i])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[j + curRow + 2, i] && j + 1 + curRow + 1 == preRow)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                // 尝试在两按钮下方查找连通通道
+                if (availableChannels[preRow + 1, curColumn + 1])
+                {
+                    for (int i = 0; i < preColumn - curColumn - 1; i++)
+                    {
+                        if (availableChannels[preRow + 1, i + curColumn + 2] && curColumn + i + 2 == preColumn)
+                        {
+                            for (int j = 0; j < preRow - curRow - 1; j++)
+                            {
+                                if (availableChannels[preRow - j, curColumn + 1] && preRow - j == curRow + 2)
+                                {
+                                    return true;
+                                }
+                                if (!availableChannels[preRow - j, curColumn + 1])
+                                {
+                                    break;
+                                }
+                            }
+                            if (!availableChannels[preRow + 1, i + curColumn + 2])
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    //继续向下
+                    for (int i = preRow + 2; i < availableRows; i++)
+                    {
+                        if ((!availableChannels[i, preColumn + 1]) || (!availableChannels[i, curColumn + 1]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < preColumn - curColumn - 1; j++)
+                            {
+                                if (!availableChannels[i, j + curColumn + 2])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[i, j + preColumn + 2] && j + 1 + curColumn + 1 == preColumn)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                    // 继续向左
+                    for (int i = 0; i < curColumn + 1; i++)
+                    {
+                        if ((!availableChannels[preRow + 1, curColumn - i]) || (!availableChannels[curRow + 1, curColumn - i]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < preRow - curRow - 1; j++)
+                            {
+                                if (!availableChannels[j + curRow + 2, curColumn - i])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[j + curRow + 2, curColumn - i] && j + 1 + curRow + 1 == preRow)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //尝试在两个按钮构成的矩形查找通道
+                // 从左上角向右下角呈Z字形检索
+                for (int i = 0; i < preColumn - curColumn - 1; i++)
+                {
+                    if (availableChannels[curRow + 1, i + curColumn + 2])
+                    {
+                        for (int j = 0; j < preRow-curRow; j++)
+                        {
+                            if (availableChannels[j + curRow + 2, curColumn + 2+i] && j + curRow + 2 == preRow+1)
+                            {
+                                if (curColumn+2+i==preColumn)
+                                {
+                                    return true;
+                                }
+                                for (int k = 0; k < preColumn - curColumn - 1 - i-1; k++)
+                                {
+                                    if (!availableChannels[preRow + 1, k + curColumn + 3+i])
+                                    {
+                                        break;
+                                    }
+                                    if (availableChannels[preRow + 1, k + curColumn + 3+i] && curColumn + 3 + k+i == preColumn)
+                                    {
+                                        return true;
+                                    }
+                                }
+                            }
+                            if (!availableChannels[j + curRow + 2, curColumn + 2+i])
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                // 从左上角向右下角呈倒Z字形检索
+                for (int i = 0; i < preRow - curRow - 1; i++)
+                {
+                    if (availableChannels[i+curRow + 2, curColumn + 1])
+                    {
+                        for (int j = 0; j < preColumn - curColumn; j++)
+                        {
+                            if (availableChannels[curRow + 2+i, j+curColumn + 2] && j + curColumn + 2 == preColumn + 1)
+                            {
+                                if (curRow+2+i==preRow)
+                                {
+                                    return true;
+                                }
+                                for (int k = 0; k < preRow - curRow - 1 - i - 1; k++)
+                                {
+                                    if (!availableChannels[k+curRow +3+i, preColumn +1])
+                                    {
+                                        break;
+                                    }
+                                    if (availableChannels[k + curRow + 3 + i, preColumn + 1] && k+curRow + 3 + i == preRow)
+                                    {
+                                        return true;
+                                    }
+                                }
+                            }
+                            if (!availableChannels[curRow + 2+i, j+curColumn + 2])
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            // 4.2.2 先前点击的按钮在当前按钮的左上方
+            if (curRow - preRow == 1 && curColumn - preColumn > 1)
+            {
+                // 尝试在两按钮上方查找连通通道
+                if (availableChannels[preRow + 1, curColumn + 1])
+                {
+                    for (int i = 0; i < Math.Abs(preColumn - curColumn) - 1; i++)
+                    {
+                        if (availableChannels[preRow + 1, i + preColumn + 2] && i + preColumn + 2 == curColumn)
+                        {
+                            return true;
+                        }
+                        if (!availableChannels[preRow + 1, i + preColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续向上
+                    for (int i = 0; i < preRow + 1; i++)
+                    {
+                        if ((!availableChannels[preRow - i, preColumn + 1]) || (!availableChannels[preRow - i, curColumn + 1]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < Math.Abs(preColumn - curColumn) - 1; j++)
+                            {
+                                if (!availableChannels[preRow - i, j + preColumn + 2])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[preRow - i, j + preColumn + 2] && j + 1 + preColumn + 1 == curColumn)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                // 尝试在两按钮下方查找连通通道
+                if (availableChannels[curRow + 1, preColumn + 1])
+                {
+                    for (int i = 0; i < Math.Abs(preColumn - curColumn) - 1; i++)
+                    {
+                        if (availableChannels[curRow + 1, i + preColumn + 2] && preColumn + i + 2 == curColumn)
+                        {
+                            return true;
+                        }
+                        if (!availableChannels[curRow + 1, i + preColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续向下
+                    for (int i = curRow + 2; i < availableRows; i++)
+                    {
+                        if ((!availableChannels[i, preColumn + 1]) || (!availableChannels[i, curColumn + 1]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < Math.Abs(preColumn - curColumn) - 1; j++)
+                            {
+                                if (!availableChannels[i, j + preColumn + 2])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[i, j + preColumn + 2] && j + 1 + preColumn + 1 == curColumn)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //尝试在两个按钮构成的矩形查找通道
+                for (int i = 0; i < Math.Abs(preColumn - curColumn) - 1; i++)
+                {
+                    if (availableChannels[preRow + 1, i + preColumn + 2])
+                    {
+                        for (int j = 0; j < Math.Abs(preColumn - curColumn) - 1 - i; j++)
+                        {
+                            if (!availableChannels[preRow + 2, j + preColumn + 2 + i])
+                            {
+                                break;
+                            }
+                            if (availableChannels[preRow + 2, j + preColumn + 2 + i] && preColumn + 2 + j + i == curColumn)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            // 4.2.3 先前点击的按钮在当前按钮的右上方
+            if (curRow - preRow == 1 && preColumn - curColumn > 1)
+            {
+                // 尝试在两按钮上方查找连通通道
+                if (availableChannels[preRow + 1, curColumn + 1])
+                {
+                    for (int i = 0; i < preColumn - curColumn - 1; i++)
+                    {
+                        if (availableChannels[preRow + 1, i + curColumn + 2] && i + curColumn + 2 == preColumn)
+                        {
+                            return true;
+                        }
+                        if (!availableChannels[preRow + 1, i + curColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续向上
+                    for (int i = 0; i < preRow + 1; i++)
+                    {
+                        if ((!availableChannels[preRow - i, preColumn + 1]) || (!availableChannels[preRow - i, curColumn + 1]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < preColumn - curColumn - 1; j++)
+                            {
+                                if (!availableChannels[preRow - i, j + curColumn + 2])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[preRow - i, j + curColumn + 2] && j + 1 + curColumn + 1 == preColumn)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                // 尝试在两按钮下方查找连通通道
+                if (availableChannels[curRow + 1, preColumn + 1])
+                {
+                    for (int i = 0; i < preColumn - curColumn - 1; i++)
+                    {
+                        if (availableChannels[curRow + 1, i + curColumn + 2] && curColumn + i + 2 == preColumn)
+                        {
+                            return true;
+                        }
+                        if (!availableChannels[curRow + 1, i + curColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续向下
+                    for (int i = curRow + 2; i < availableRows; i++)
+                    {
+                        if ((!availableChannels[i, preColumn + 1]) || (!availableChannels[i, curColumn + 1]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < preColumn - curColumn - 1; j++)
+                            {
+                                if (!availableChannels[i, j + curColumn + 2])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[i, j + curColumn + 2] && j + 1 + curColumn + 1 == preColumn)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //尝试在两个按钮构成的矩形查找通道
+                for (int i = 0; i < preColumn - curColumn - 1; i++)
+                {
+                    if (availableChannels[curRow + 1, i + curColumn + 2])
+                    {
+                        for (int j = 0; j < preColumn - curColumn - 1 - i; j++)
+                        {
+                            if (!availableChannels[preRow + 1, j + curColumn + 2 + i])
+                            {
+                                break;
+                            }
+                            if (availableChannels[preRow + 1, j + curColumn + 2 + i] && curColumn + 2 + j + i == preColumn)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            // 4.2.4 先前点击的按钮在当前按钮的左下方
+            if (preRow - curRow == 1 && curColumn - preColumn > 1)
+            {
+                // 尝试在两按钮上方查找连通通道
+                if (availableChannels[curRow + 1, preColumn + 1])
+                {
+                    for (int i = 0; i < Math.Abs(preColumn - curColumn) - 1; i++)
+                    {
+                        if (availableChannels[curRow + 1, i + preColumn + 2] && i + preColumn + 2 == curColumn)
+                        {
+                            return true;
+                        }
+                        if (!availableChannels[curRow + 1, i + preColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续向上
+                    for (int i = 0; i < curRow + 1; i++)
+                    {
+                        if ((!availableChannels[curRow - i, preColumn + 1]) || (!availableChannels[curRow - i, curColumn + 1]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < Math.Abs(preColumn - curColumn) - 1; j++)
+                            {
+                                if (!availableChannels[curRow - i, j + preColumn + 2])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[preRow - i, j + preColumn + 2] && j + 1 + preColumn + 1 == curColumn)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                // 尝试在两按钮下方查找连通通道
+                if (availableChannels[preRow + 1, curColumn + 1])
+                {
+                    for (int i = 0; i < Math.Abs(preColumn - curColumn) - 1; i++)
+                    {
+                        if (availableChannels[preRow + 1, i + preColumn + 2] && preColumn + i + 2 == curColumn)
+                        {
+                            return true;
+                        }
+                        if (!availableChannels[preRow + 1, i + preColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续向下
+                    for (int i = preRow + 2; i < availableRows; i++)
+                    {
+                        if ((!availableChannels[i, preColumn + 1]) || (!availableChannels[i, curColumn + 1]))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            for (int j = 0; j < Math.Abs(preColumn - curColumn) - 1; j++)
+                            {
+                                if (!availableChannels[i, j + preColumn + 2])
+                                {
+                                    break;
+                                }
+                                if (availableChannels[i, j + preColumn + 2] && j + 1 + preColumn + 1 == curColumn)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //尝试在两个按钮构成的矩形查找通道
+                for (int i = 0; i < Math.Abs(preColumn - curColumn) - 1; i++)
+                {
+                    if (availableChannels[preRow + 1, i + preColumn + 2])
+                    {
+                        for (int j = 0; j < Math.Abs(preColumn - curColumn) - 1 - i; j++)
+                        {
+                            if (!availableChannels[curRow + 1, j + preColumn + 2 + i])
+                            {
+                                break;
+                            }
+                            if (availableChannels[curRow + 1, j + preColumn + 2 + i] && preColumn + 2 + j + i == curColumn)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
             return judge;
         }
         #endregion
