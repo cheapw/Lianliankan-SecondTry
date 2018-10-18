@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Lianliankan_SecondTry"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -67,16 +67,21 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <StackPanel>
-        <TextBlock Text="欢乐连连看" FontSize="60" HorizontalAlignment="Center" Margin="0,35"/>
-        <DockPanel LastChildFill="True">
-            <StackPanel DockPanel.Dock="Left">
-                <TextBlock Text="选择难度，开始游戏：" FontSize="30" Margin="10"></TextBlock>
+    <StackPanel VerticalAlignment="Center">
+        <TextBlock Text="欢乐连连看" FontSize="60" HorizontalAlignment="Center" Margin="0,0,0,35"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="选择难度，开始游戏：" FontSize="28" Margin="10" HorizontalAlignment="Center"></TextBlock>
                 <Button Content="简单" Click="Button_Click"/>
                 <Button Content="中等"/>
                 <Button Content="困难"/>
+                <Button Content="自定义"/>
             </StackPanel>
-            <StackPanel>
+            <StackPanel Grid.Column="1">
                 <TextBlock Text="排行榜" FontSize="45" HorizontalAlignment="Center"/>
                 <ListView x:Name="lvRank" Margin="12" FontSize="18">
                     <ListView.View>
@@ -88,6 +93,6 @@
                     </ListView.View>
                 </ListView>
             </StackPanel>
-        </DockPanel>
+        </Grid>
     </StackPanel>
 </Window>

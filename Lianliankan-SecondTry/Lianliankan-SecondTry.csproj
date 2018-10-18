@@ -117,5 +117,13 @@
     <Resource Include="Resources\Images\scissors.png" />
     <Resource Include="Resources\Images\scissors_OneColor.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\chat.png" />
+    <Resource Include="Resources\Images\chat_OneColor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\toolbox.png" />
+    <Resource Include="Resources\Images\toolbox_OneColor.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

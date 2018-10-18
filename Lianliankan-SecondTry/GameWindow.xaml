@@ -22,6 +22,10 @@
         <ImageBrush x:Key="image6_OneColor" ImageSource="/Resources/Images/rocket_OneColor.png"/>
         <ImageBrush x:Key="image7_FullColor" ImageSource="/Resources/Images/scissors.png"/>
         <ImageBrush x:Key="image7_OneColor" ImageSource="/Resources/Images/scissors_OneColor.png"/>
+        <ImageBrush x:Key="image8_FullColor" ImageSource="/Resources/Images/chat.png"/>
+        <ImageBrush x:Key="image8_OneColor" ImageSource="/Resources/Images/chat_OneColor.png"/>
+        <ImageBrush x:Key="image9_FullColor" ImageSource="/Resources/Images/toolbox.png"/>
+        <ImageBrush x:Key="image10_OneColor" ImageSource="/Resources/Images/toolbox_OneColor.png"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
