@@ -34,7 +34,7 @@ namespace Lianliankan_SecondTry
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GameWindow gameWindow = new GameWindow();
+            GameWindow gameWindow = new GameWindow(7, 8);
             this.Hide();
             gameWindow.Show();
         }

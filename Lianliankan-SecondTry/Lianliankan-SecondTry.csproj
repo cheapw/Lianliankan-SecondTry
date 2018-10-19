@@ -125,5 +125,33 @@
     <Resource Include="Resources\Images\toolbox.png" />
     <Resource Include="Resources\Images\toolbox_OneColor.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\GameUIAction\19.png" />
+    <Resource Include="Resources\GameUIAction\20.png" />
+    <Resource Include="Resources\GameUIAction\33.png" />
+    <Resource Include="Resources\GameUIAction\34.png" />
+    <Resource Include="Resources\GameUIAction\35.png" />
+    <Resource Include="Resources\GameUIAction\42.png" />
+    <Resource Include="Resources\GameUIAction\43.png" />
+    <Resource Include="Resources\GameUIAction\48.png" />
+    <Resource Include="Resources\GameUIAction\50.png" />
+    <Resource Include="Resources\GameUIAction\51.png" />
+    <Resource Include="Resources\GameUIAction\52.png" />
+    <Resource Include="Resources\GameUIAction\56.png" />
+    <Resource Include="Resources\GameUIAction\57.png" />
+    <Resource Include="Resources\GameUIAction\58.png" />
+    <Resource Include="Resources\GameUIAction\59.png" />
+    <Resource Include="Resources\GameUIAction\61.png" />
+    <Resource Include="Resources\GameUIAction\62.png" />
+    <Resource Include="Resources\GameUIAction\86.png" />
+    <Resource Include="Resources\GameUIAction\batteryfull.png" />
+    <Resource Include="Resources\GameUIAction\batterylow.png" />
+    <Resource Include="Resources\GameUIAction\brightness.png" />
+    <Resource Include="Resources\GameUIAction\hourglass.png" />
+    <Resource Include="Resources\GameUIAction\ic_cached_black_48dp.png" />
+    <Resource Include="Resources\GameUIAction\ic_cached_grey600_48dp.png" />
+    <Resource Include="Resources\GameUIAction\ic_cached_white_48dp.png" />
+    <Resource Include="Resources\GameUIAction\magicwand.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

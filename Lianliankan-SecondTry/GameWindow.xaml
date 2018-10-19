@@ -26,64 +26,95 @@
         <ImageBrush x:Key="image8_OneColor" ImageSource="/Resources/Images/chat_OneColor.png"/>
         <ImageBrush x:Key="image9_FullColor" ImageSource="/Resources/Images/toolbox.png"/>
         <ImageBrush x:Key="image10_OneColor" ImageSource="/Resources/Images/toolbox_OneColor.png"/>
+        <Style TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0"/>
-        <Button Grid.Row="0" Grid.Column="1"/>
-        <Button Grid.Row="0" Grid.Column="2"/>
-        <Button Grid.Row="0" Grid.Column="3"/>
-        <Button Grid.Row="0" Grid.Column="4"/>
-        <Button Grid.Row="0" Grid.Column="5"/>
+        <StackPanel Grid.ColumnSpan="2">
+            <ProgressBar x:Name="progressBar" Grid.ColumnSpan="2" Background="AliceBlue" BorderBrush="AliceBlue" BorderThickness="5" Value="50" Foreground="Aqua"/>
+            <!--<StackPanel Orientation="Horizontal">
+                <Button MinWidth="100" MinHeight="35">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Resources/GameUIAction/61.png"/>
+                    </Button.Background>
+                </Button>
+                <Button MinWidth="100" MinHeight="35">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Resources/GameUIAction/33.png"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock Text="3:00" FontSize="45" Margin="25,5"/>
+            </StackPanel>-->
+        </StackPanel>
+        
+        <Grid x:Name="gamePanel" Margin="10" Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0"/>
+            <Button Grid.Row="0" Grid.Column="1"/>
+            <Button Grid.Row="0" Grid.Column="2"/>
+            <Button Grid.Row="0" Grid.Column="3"/>
+            <Button Grid.Row="0" Grid.Column="4"/>
+            <Button Grid.Row="0" Grid.Column="5"/>
 
-        <Button Grid.Row="1" Grid.Column="0"/>
-        <Button Grid.Row="1" Grid.Column="1"/>
-        <Button Grid.Row="1" Grid.Column="2"/>
-        <Button Grid.Row="1" Grid.Column="3"/>
-        <Button Grid.Row="1" Grid.Column="4"/>
-        <Button Grid.Row="1" Grid.Column="5"/>
+            <Button Grid.Row="1" Grid.Column="0"/>
+            <Button Grid.Row="1" Grid.Column="1"/>
+            <Button Grid.Row="1" Grid.Column="2"/>
+            <Button Grid.Row="1" Grid.Column="3"/>
+            <Button Grid.Row="1" Grid.Column="4"/>
+            <Button Grid.Row="1" Grid.Column="5"/>
 
-        <Button Grid.Row="2" Grid.Column="0"/>
-        <Button Grid.Row="2" Grid.Column="1"/>
-        <Button Grid.Row="2" Grid.Column="2"/>
-        <Button Grid.Row="2" Grid.Column="3"/>
-        <Button Grid.Row="2" Grid.Column="4"/>
-        <Button Grid.Row="2" Grid.Column="5"/>
+            <Button Grid.Row="2" Grid.Column="0"/>
+            <Button Grid.Row="2" Grid.Column="1"/>
+            <Button Grid.Row="2" Grid.Column="2"/>
+            <Button Grid.Row="2" Grid.Column="3"/>
+            <Button Grid.Row="2" Grid.Column="4"/>
+            <Button Grid.Row="2" Grid.Column="5"/>
 
-        <Button Grid.Row="3" Grid.Column="0"/>
-        <Button Grid.Row="3" Grid.Column="1"/>
-        <Button Grid.Row="3" Grid.Column="2"/>
-        <Button Grid.Row="3" Grid.Column="3"/>
-        <Button Grid.Row="3" Grid.Column="4"/>
-        <Button Grid.Row="3" Grid.Column="5"/>
+            <Button Grid.Row="3" Grid.Column="0"/>
+            <Button Grid.Row="3" Grid.Column="1"/>
+            <Button Grid.Row="3" Grid.Column="2"/>
+            <Button Grid.Row="3" Grid.Column="3"/>
+            <Button Grid.Row="3" Grid.Column="4"/>
+            <Button Grid.Row="3" Grid.Column="5"/>
 
-        <Button Grid.Row="4" Grid.Column="0"/>
-        <Button Grid.Row="4" Grid.Column="1"/>
-        <Button Grid.Row="4" Grid.Column="2"/>
-        <Button Grid.Row="4" Grid.Column="3"/>
-        <Button Grid.Row="4" Grid.Column="4"/>
-        <Button Grid.Row="4" Grid.Column="5"/>
+            <Button Grid.Row="4" Grid.Column="0"/>
+            <Button Grid.Row="4" Grid.Column="1"/>
+            <Button Grid.Row="4" Grid.Column="2"/>
+            <Button Grid.Row="4" Grid.Column="3"/>
+            <Button Grid.Row="4" Grid.Column="4"/>
+            <Button Grid.Row="4" Grid.Column="5"/>
 
-        <Button Grid.Row="5" Grid.Column="0"/>
-        <Button Grid.Row="5" Grid.Column="1"/>
-        <Button Grid.Row="5" Grid.Column="2"/>
-        <Button Grid.Row="5" Grid.Column="3"/>
-        <Button Grid.Row="5" Grid.Column="4"/>
-        <Button Grid.Row="5" Grid.Column="5"/>
+            <Button Grid.Row="5" Grid.Column="0"/>
+            <Button Grid.Row="5" Grid.Column="1"/>
+            <Button Grid.Row="5" Grid.Column="2"/>
+            <Button Grid.Row="5" Grid.Column="3"/>
+            <Button Grid.Row="5" Grid.Column="4"/>
+            <Button Grid.Row="5" Grid.Column="5"/>
+        </Grid>
     </Grid>
+    
 </Window>
