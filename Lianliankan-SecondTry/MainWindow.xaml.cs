@@ -20,6 +20,8 @@ namespace Lianliankan_SecondTry
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region 用户自定义方法
+        #endregion
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +36,28 @@ namespace Lianliankan_SecondTry
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GameWindow gameWindow = new GameWindow(7, 8);
+            int userSetRows, userSetColumns, picNumber;
+            userSetRows = userSetColumns = picNumber = 6;
+            if ((string)((sender as Button).Tag)=="1")
+            {
+                userSetRows = 7;
+                userSetColumns = 8;
+                picNumber = 9;
+            }
+            if ((string)((sender as Button).Tag) == "2")
+            {
+                userSetRows = 8;
+                userSetColumns = 9;
+                picNumber = 9;
+            }
+            if ((string)((sender as Button).Tag) == "3")
+            {
+                DifficultySettingWindow difficultySettingWindow = new DifficultySettingWindow();
+                this.Hide();
+                difficultySettingWindow.Show();
+                //return;
+            }
+            GameWindow gameWindow = new GameWindow(userSetRows,userSetColumns,picNumber);
             this.Hide();
             gameWindow.Show();
         }

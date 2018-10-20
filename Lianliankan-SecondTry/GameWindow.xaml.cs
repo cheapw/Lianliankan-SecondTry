@@ -22,7 +22,7 @@ namespace Lianliankan_SecondTry
         #region 公共属性，用户传来的一些游戏初始设置
         public int UserSetRows { get; set; }
         public int UserSetColumns { get; set; }
-
+        public int PicNumbers { get; set; }
         #endregion
         #region 私有字段
         // 一维数组，所有所需的图片，相同的图片可能有数张，数量为偶数，图片总数与按钮总数相同，且按照添加进按钮的顺序排列
@@ -2386,11 +2386,12 @@ namespace Lianliankan_SecondTry
         #endregion
 
 
-        public GameWindow(int userSetRows,int userSetColumns)
+        public GameWindow(int userSetRows=6,int userSetColumns=6,int picNumber=6)
         {
             InitializeComponent();
             this.UserSetRows = userSetRows;
             this.UserSetColumns = userSetColumns;
+            this.PicNumbers = PicNumbers;
 
             SetGridRows();
             SetGridColumns();

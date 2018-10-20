@@ -25,7 +25,7 @@
         <ImageBrush x:Key="image8_FullColor" ImageSource="/Resources/Images/chat.png"/>
         <ImageBrush x:Key="image8_OneColor" ImageSource="/Resources/Images/chat_OneColor.png"/>
         <ImageBrush x:Key="image9_FullColor" ImageSource="/Resources/Images/toolbox.png"/>
-        <ImageBrush x:Key="image10_OneColor" ImageSource="/Resources/Images/toolbox_OneColor.png"/>
+        <ImageBrush x:Key="image9_OneColor" ImageSource="/Resources/Images/toolbox_OneColor.png"/>
         <Style TargetType="Button">
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
