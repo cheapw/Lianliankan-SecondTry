@@ -1458,6 +1458,39 @@ namespace Lianliankan_SecondTry
                             break;
                         }
                     }
+                    // 重新执行列上的查找
+                    for (int j = 0; j < preRow - curRow - 1; j++)
+                    {
+                        if (availableChannels[j + curRow + 2, preColumn + 1] && j + curRow + 2 == preRow)
+                        {
+                            // 继续向上
+                            for (int i = 0; i < curRow + 1; i++)
+                            {
+                                if ((!availableChannels[curRow - i, preColumn + 1]) || (!availableChannels[curRow - i, curColumn + 1]))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = 0; k < preColumn - curColumn - 1; k++)
+                                    {
+                                        if (!availableChannels[curRow - i,k + curColumn + 2])
+                                        {
+                                            break;
+                                        }
+                                        if (availableChannels[curRow - i, k + curColumn + 2] && k + 1 + curColumn + 1 == preColumn)
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!availableChannels[j + curRow + 2, preColumn + 1])
+                        {
+                            break;
+                        }
+                    }
                 }
                 // 尝试在两按钮下方查找连通通道
                 if (availableChannels[preRow + 1, curColumn + 1])
@@ -1505,7 +1538,40 @@ namespace Lianliankan_SecondTry
                         {
                             break;
                         }
-                    }  
+                    }
+                    // 重新完成列上的查找
+                    for (int j = 0; j < preRow - curRow - 1; j++)
+                    {
+                        if (availableChannels[preRow - j, curColumn + 1] && preRow - j == curRow + 2)
+                        {
+                            //继续向下
+                            for (int i = preRow + 2; i < availableRows; i++)
+                            {
+                                if ((!availableChannels[i, preColumn + 1]) || (!availableChannels[i, curColumn + 1]))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = 0; k < preColumn - curColumn - 1; k++)
+                                    {
+                                        if (!availableChannels[i, k + curColumn + 2])
+                                        {
+                                            break;
+                                        }
+                                        if (availableChannels[i, k + curColumn + 2] && k + 1 + curColumn + 1 == preColumn)
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!availableChannels[preRow - j, curColumn + 1])
+                        {
+                            break;
+                        }
+                    }
                 }
 
                 //尝试在两个按钮构成的矩形查找通道
@@ -1632,6 +1698,39 @@ namespace Lianliankan_SecondTry
                             break;
                         }
                     }
+                    // 继续完成列上的路径查找
+                    for (int j = 0; j < Math.Abs(preRow - curRow) - 1; j++)
+                    {
+                        if (availableChannels[j + preRow + 2, curColumn + 1] && j + preRow + 2 == curRow)
+                        {
+                            // 继续向上
+                            for (int i = 0; i < preRow + 1; i++)
+                            {
+                                if ((!availableChannels[preRow - i, preColumn + 1]) || (!availableChannels[preRow - i, curColumn + 1]))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = 0; k < Math.Abs(preColumn - curColumn) - 1; k++)
+                                    {
+                                        if (!availableChannels[preRow - i, k + preColumn + 2])
+                                        {
+                                            break;
+                                        }
+                                        if (availableChannels[preRow - i, k + preColumn + 2] && k + 1 + preColumn + 1 == curColumn)
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!availableChannels[j + preRow + 2, curColumn + 1])
+                        {
+                            break;
+                        }
+                    }
                 }
                 // 尝试在两按钮下方查找连通通道
                 if (availableChannels[curRow + 1, preColumn + 1])
@@ -1676,6 +1775,39 @@ namespace Lianliankan_SecondTry
                             }
                         }
                         if (!availableChannels[curRow + 1, i + preColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续完成列上的路径查找
+                    for (int j = 0; j < Math.Abs(preRow - curRow) - 1; j++)
+                    {
+                        if (availableChannels[curRow - j, preColumn + 1] && curRow - j == preRow + 2)
+                        {
+                            //继续向下
+                            for (int i = curRow + 2; i < availableRows; i++)
+                            {
+                                if ((!availableChannels[i, preColumn + 1]) || (!availableChannels[i, curColumn + 1]))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = 0; k < Math.Abs(preColumn - curColumn) - 1; k++)
+                                    {
+                                        if (!availableChannels[i, k + preColumn + 2])
+                                        {
+                                            break;
+                                        }
+                                        if (availableChannels[i, k + preColumn + 2] && k + 1 + preColumn + 1 == curColumn)
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!availableChannels[curRow - j, preColumn + 1])
                         {
                             break;
                         }
@@ -1806,6 +1938,39 @@ namespace Lianliankan_SecondTry
                             break;
                         }
                     }
+                    // 继续完成列上的路径查找
+                    for (int j = 0; j < preRow - curRow - 1; j++)
+                    {
+                        if (availableChannels[j + curRow + 2, preColumn + 1] && j + curRow + 2 == preRow)
+                        {
+                            // 继续向上
+                            for (int i = 0; i < preRow + 1; i++)
+                            {
+                                if ((!availableChannels[preRow - i, preColumn + 1]) || (!availableChannels[preRow - i, curColumn + 1]))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = 0; k < preColumn - curColumn - 1; k++)
+                                    {
+                                        if (!availableChannels[preRow - i, k + curColumn + 2])
+                                        {
+                                            break;
+                                        }
+                                        if (availableChannels[preRow - i, k + curColumn + 2] && k + 1 + curColumn + 1 == preColumn)
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!availableChannels[j + curRow + 2, preColumn + 1])
+                        {
+                            break;
+                        }
+                    }
                 }
                 // 尝试在两按钮下方查找连通通道
                 if (availableChannels[curRow + 1, preColumn + 1])
@@ -1850,6 +2015,39 @@ namespace Lianliankan_SecondTry
                             }
                         }
                         if (!availableChannels[curRow + 1, i + curColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续完成列上的路径查找
+                    for (int j = 0; j < Math.Abs(preRow - curRow) - 1; j++)
+                    {
+                        if (availableChannels[curRow - j, preColumn + 1] && curRow - j == preRow + 2)
+                        {
+                            //继续向下
+                            for (int i = curRow + 2; i < availableRows; i++)
+                            {
+                                if ((!availableChannels[i, preColumn + 1]) || (!availableChannels[i, curColumn + 1]))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = 0; k < preColumn - curColumn - 1; k++)
+                                    {
+                                        if (!availableChannels[i, k + curColumn + 2])
+                                        {
+                                            break;
+                                        }
+                                        if (availableChannels[i, k + curColumn + 2] && k + 1 + curColumn + 1 == preColumn)
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!availableChannels[curRow - j, preColumn + 1])
                         {
                             break;
                         }
@@ -1980,6 +2178,39 @@ namespace Lianliankan_SecondTry
                             break;
                         }
                     }
+                    // 继续完成列上的路径查找
+                    for (int j = 0; j < preRow - curRow - 1; j++)
+                    {
+                        if (availableChannels[j + curRow + 2, preColumn + 1] && j + curRow + 2 == preRow)
+                        {
+                            // 继续向上
+                            for (int i = 0; i < curRow + 1; i++)
+                            {
+                                if ((!availableChannels[curRow - i, preColumn + 1]) || (!availableChannels[curRow - i, curColumn + 1]))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = 0; k < Math.Abs(preColumn - curColumn) - 1; k++)
+                                    {
+                                        if (!availableChannels[curRow - i, k + preColumn + 2])
+                                        {
+                                            break;
+                                        }
+                                        if (availableChannels[curRow - i, k + preColumn + 2] && k + 1 + preColumn + 1 == curColumn)
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!availableChannels[j + curRow + 2, preColumn + 1])
+                        {
+                            break;
+                        }
+                    }
                 }
                 // 尝试在两按钮下方查找连通通道
                 if (availableChannels[preRow + 1, curColumn + 1])
@@ -2024,6 +2255,39 @@ namespace Lianliankan_SecondTry
                             }
                         }
                         if (!availableChannels[preRow + 1, i + preColumn + 2])
+                        {
+                            break;
+                        }
+                    }
+                    // 继续完成列上的路径查找
+                    for (int j = 0; j < preRow - curRow - 1; j++)
+                    {
+                        if (availableChannels[preRow - j, curColumn + 1] && preRow - j == curRow + 2)
+                        {
+                            //继续向下
+                            for (int i = preRow + 2; i < availableRows; i++)
+                            {
+                                if ((!availableChannels[i, preColumn + 1]) || (!availableChannels[i, curColumn + 1]))
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    for (int k = 0; k < Math.Abs(preColumn - curColumn) - 1; k++)
+                                    {
+                                        if (!availableChannels[i, k + preColumn + 2])
+                                        {
+                                            break;
+                                        }
+                                        if (availableChannels[i, k + preColumn + 2] && k + 1 + preColumn + 1 == curColumn)
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!availableChannels[preRow - j, curColumn + 1])
                         {
                             break;
                         }
