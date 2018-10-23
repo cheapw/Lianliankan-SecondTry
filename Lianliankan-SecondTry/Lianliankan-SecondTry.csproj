@@ -160,5 +160,95 @@
     <Resource Include="Resources\GameUIAction\ic_cached_white_48dp.png" />
     <Resource Include="Resources\GameUIAction\magicwand.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\compass.png" />
+    <Resource Include="Resources\Images\compass_OneColor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\keyboard.png" />
+    <Resource Include="Resources\Images\keyboard_OneColor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\radio.png" />
+    <Resource Include="Resources\Images\radio_OneColor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\fashion.png" />
+    <Resource Include="Resources\Images\fashion_OneColor.png" />
+    <Resource Include="Resources\Images\filmreel.png" />
+    <Resource Include="Resources\Images\filmreel_OneColor.png" />
+    <Resource Include="Resources\Images\genius.png" />
+    <Resource Include="Resources\Images\genius_OneColor.png" />
+    <Resource Include="Resources\Images\present.png" />
+    <Resource Include="Resources\Images\present_OneColor.png" />
+    <Resource Include="Resources\Images\racingflags.png" />
+    <Resource Include="Resources\Images\racingflags_OneColor.png" />
+    <Resource Include="Resources\Images\sailboat.png" />
+    <Resource Include="Resources\Images\sailboat_OneColor.png" />
+    <Resource Include="Resources\Images\shoeprints.png" />
+    <Resource Include="Resources\Images\shoeprints_OneColor.png" />
+    <Resource Include="Resources\Images\smartphone.png" />
+    <Resource Include="Resources\Images\smartphone_OneColor.png" />
+    <Resource Include="Resources\Images\stack.png" />
+    <Resource Include="Resources\Images\stack_OneColor.png" />
+    <Resource Include="Resources\Images\tools.png" />
+    <Resource Include="Resources\Images\tools_OneColor.png" />
+    <Resource Include="Resources\Images\trophy.png" />
+    <Resource Include="Resources\Images\trophy_OneColor.png" />
+    <Resource Include="Resources\Images\umbrella.png" />
+    <Resource Include="Resources\Images\umbrella_OneColor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\arrow-down.png" />
+    <Resource Include="Resources\Images\arrow-down_OneColor.png" />
+    <Resource Include="Resources\Images\arrow-up.png" />
+    <Resource Include="Resources\Images\arrow-up_OneColor.png" />
+    <Resource Include="Resources\Images\art.png" />
+    <Resource Include="Resources\Images\art_OneColor.png" />
+    <Resource Include="Resources\Images\blimp.png" />
+    <Resource Include="Resources\Images\blimp_OneColor.png" />
+    <Resource Include="Resources\Images\brightness.png" />
+    <Resource Include="Resources\Images\brightness_OneColor.png" />
+    <Resource Include="Resources\Images\calendar.png" />
+    <Resource Include="Resources\Images\calendar_OneColor.png" />
+    <Resource Include="Resources\Images\camera.png" />
+    <Resource Include="Resources\Images\camera_OneColor.png" />
+    <Resource Include="Resources\Images\computer.png" />
+    <Resource Include="Resources\Images\computer_OneColor.png" />
+    <Resource Include="Resources\Images\die.png" />
+    <Resource Include="Resources\Images\die_OneColor.png" />
+    <Resource Include="Resources\Images\gas.png" />
+    <Resource Include="Resources\Images\gas_OneColor.png" />
+    <Resource Include="Resources\Images\global_OneColor.png" />
+    <Resource Include="Resources\Images\global.png" />
+    <Resource Include="Resources\Images\interstate.png" />
+    <Resource Include="Resources\Images\interstate_OneColor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\bomb.png" />
+    <Resource Include="Resources\Images\bomb_OneColor.png" />
+    <Resource Include="Resources\Images\brush-pencil.png" />
+    <Resource Include="Resources\Images\brush-pencil_OneColor.png" />
+    <Resource Include="Resources\Images\contacts.png" />
+    <Resource Include="Resources\Images\contacts_OneColor.png" />
+    <Resource Include="Resources\Images\dolly.png" />
+    <Resource Include="Resources\Images\dolly_OneColor.png" />
+    <Resource Include="Resources\Images\gamecontroller.png" />
+    <Resource Include="Resources\Images\gamecontroller_OneColor.png" />
+    <Resource Include="Resources\Images\locked.png" />
+    <Resource Include="Resources\Images\locked_OneColor.png" />
+    <Resource Include="Resources\Images\megaphone.png" />
+    <Resource Include="Resources\Images\megaphone_OneColor.png" />
+    <Resource Include="Resources\Images\mic.png" />
+    <Resource Include="Resources\Images\mic_OneColor.png" />
+    <Resource Include="Resources\Images\news.png" />
+    <Resource Include="Resources\Images\news_OneColor.png" />
+    <Resource Include="Resources\Images\paintcan.png" />
+    <Resource Include="Resources\Images\paintcan_OneColor.png" />
+    <Resource Include="Resources\Images\parachute.png" />
+    <Resource Include="Resources\Images\parachute_OneColor.png" />
+    <Resource Include="Resources\Images\power.png" />
+    <Resource Include="Resources\Images\power_OneColor.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

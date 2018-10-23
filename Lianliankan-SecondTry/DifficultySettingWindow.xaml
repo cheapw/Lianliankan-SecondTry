@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lianliankan_SecondTry"
         mc:Ignorable="d"
-        Title="DifficultySettingWindow" Height="450" Width="800">
-    <StackPanel Orientation="Horizontal">
-        
-    </StackPanel>
+        Title="DifficultySettingWindow" Height="550" Width="1000" Closed="Window_Closed" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+        <Style x:Key="textBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Slider x:Name="horizontalSlider" Grid.Column="1" Foreground="Green"
+        Orientation="Horizontal" HorizontalAlignment="Stretch" 
+        IsSnapToTickEnabled="False" Minimum="1" Maximum="20" 
+        TickPlacement="Both"  TickFrequency="1" Tag="1" MouseLeave="Slider_MouseLeave"
+        AutoToolTipPlacement="BottomRight"/>
+        <Slider x:Name="verticalSlider"  Margin="10, 0, 0, 0" Grid.Row="1" IsDirectionReversed="True" Foreground="Green"
+            Orientation="Vertical" VerticalAlignment="Stretch" Tag="2" MouseLeave="Slider_MouseLeave"
+            Minimum="1" Maximum="12" AutoToolTipPlacement="BottomRight"
+            TickPlacement="Both" TickFrequency="1"/>
+        <Grid x:Name="ShowPad" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="45" Height="35"/>
+        </Grid>
+    </Grid>
 </Window>

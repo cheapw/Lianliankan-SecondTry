@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Lianliankan_SecondTry"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="500" Width="800" Closed="Window_Closed">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -76,13 +76,13 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TextBlock Text="选择难度，开始游戏：" FontSize="28" Margin="10" HorizontalAlignment="Center"></TextBlock>
-                <Button Content="简单" Click="Button_Click"/>
+                <Button Content="简单" Tag="0" Click="Button_Click"/>
                 <Button Content="中等" Tag="1" Click="Button_Click"/>
                 <Button Content="困难" Tag="2" Click="Button_Click"/>
                 <Button Content="自定义" Tag="3" Click="Button_Click"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <TextBlock Text="排行榜" FontSize="45" HorizontalAlignment="Center"/>
+                <TextBlock Text="排行榜" FontSize="40" HorizontalAlignment="Center"/>
                 <ListView x:Name="lvRank" Margin="12" FontSize="18">
                     <ListView.View>
                         <GridView>

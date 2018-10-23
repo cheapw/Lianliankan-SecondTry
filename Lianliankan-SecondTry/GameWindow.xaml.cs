@@ -22,8 +22,9 @@ namespace Lianliankan_SecondTry
         #region 公共属性，用户传来的一些游戏初始设置
         public int UserSetRows { get; set; }
         public int UserSetColumns { get; set; }
-        public int PicNumbers { get; set; }
+        public int ImageNumbers { get; set; }
         #endregion
+
         #region 私有字段
         // 一维数组，所有所需的图片，相同的图片可能有数张，数量为偶数，图片总数与按钮总数相同，且按照添加进按钮的顺序排列
         private List<ImageInfo> allImageInfoNeeded = null;
@@ -37,6 +38,7 @@ namespace Lianliankan_SecondTry
         // 外圈全部为true，有按钮占据的地方全部为false，按钮被消除后相应位置变为true
         private bool[,] availableChannels = null;
         #endregion
+
         #region 根据用户传来的一些数据进行初始设定，例如Grid 网格的行和列，按钮的个数等
         private void SetGridRows()
         {
@@ -64,15 +66,15 @@ namespace Lianliankan_SecondTry
                 for (int j = 0; j < UserSetColumns; j++)
                 {
                     Button button = new Button();
+                    button.BorderThickness = new Thickness(0);
                     Grid.SetRow(button, i);
                     Grid.SetColumn(button, j);
                     gamePanel.Children.Add(button);
                 }
             }
         }
-
-
         #endregion
+
         #region 将图片随机添加到用户界面，并记录图片的位置
         /// <summary>
         /// 获取图片信息列表，所有的图片均不相同
@@ -83,7 +85,7 @@ namespace Lianliankan_SecondTry
             List<ImageInfo> imageInfos = new List<ImageInfo>();
             int index = 1;
             
-            while (true)
+            while (index<=ImageNumbers)
             {
                 string resourceKey = "image" + index.ToString() + "_FullColor";
                 // 尝试通过资源键查找资源，若返回null 就终止循环
@@ -210,6 +212,7 @@ namespace Lianliankan_SecondTry
             return imageInfo;
         }
         #endregion
+
         #region 配对消除
         /// <summary>
         /// 获取按钮最大行的索引
@@ -1071,7 +1074,7 @@ namespace Lianliankan_SecondTry
                                 {
                                     break;
                                 }
-                                if (availableChannels[i, j + preColumn + 2] && j + 1 + curColumn + 1 == preColumn)
+                                if (availableChannels[i, j + curColumn + 2] && j + 1 + curColumn + 1 == preColumn)
                                 {
                                     return true;
                                 }
@@ -1337,7 +1340,7 @@ namespace Lianliankan_SecondTry
                                 {
                                     break;
                                 }
-                                if (availableChannels[preRow - i, j + preColumn + 2] && j + 1 + preColumn + 1 == curColumn)
+                                if (availableChannels[curRow - i, j + preColumn + 2] && j + 1 + preColumn + 1 == curColumn)
                                 {
                                     return true;
                                 }
@@ -1921,7 +1924,7 @@ namespace Lianliankan_SecondTry
                                 }
                             }
                             // 继续完成列上的路径查找
-                            for (int j = 0; j < preRow - curRow - 1; j++)
+                            for (int j = 0; j < Math.Abs(preRow - curRow) - 1; j++)
                             {
                                 if (availableChannels[j + curRow + 2, preColumn + 1] && j + curRow + 2 == preRow)
                                 {
@@ -1939,7 +1942,7 @@ namespace Lianliankan_SecondTry
                         }
                     }
                     // 继续完成列上的路径查找
-                    for (int j = 0; j < preRow - curRow - 1; j++)
+                    for (int j = 0; j < Math.Abs(preRow - curRow) - 1; j++)
                     {
                         if (availableChannels[j + curRow + 2, preColumn + 1] && j + curRow + 2 == preRow)
                         {
@@ -2386,12 +2389,14 @@ namespace Lianliankan_SecondTry
         #endregion
 
 
-        public GameWindow(int userSetRows=6,int userSetColumns=6,int picNumber=6)
+        public GameWindow(int userSetRows, int userSetColumns, int imageNumbers, double height, double width)
         {
             InitializeComponent();
             this.UserSetRows = userSetRows;
             this.UserSetColumns = userSetColumns;
-            this.PicNumbers = PicNumbers;
+            this.ImageNumbers = imageNumbers;
+            this.Height = height;
+            this.Width = width;
 
             SetGridRows();
             SetGridColumns();
@@ -2409,6 +2414,8 @@ namespace Lianliankan_SecondTry
             foreach (var item in buttons)
             {
                 item.Click += Item_Click;
+                item.MouseEnter += Item_MouseEnter;
+                item.MouseLeave += Item_MouseLeave;
             }
 
         }
@@ -2474,10 +2481,32 @@ namespace Lianliankan_SecondTry
                 }
             }
         }
+        private void Item_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button button = sender as Button;
+            int imageId = imageInfoArray[GetRow(button), GetColumn(button)].Id;
+            ImageBrush imageBrush=(ImageBrush)TryFindResource("image" + imageId + "_OneColor");
+            if (imageBrush != null)
+            {
+                button.Background = imageBrush;
+            }
+            else throw new Exception("内部资源图片丢失！");
+        }
+        private void Item_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button button = sender as Button;
+            int imageId = imageInfoArray[GetRow(button), GetColumn(button)].Id;
+            ImageBrush imageBrush = (ImageBrush)TryFindResource("image" + imageId + "_FullColor");
+            if (imageBrush != null)
+            {
+                button.Background = imageBrush;
+            }
+            else throw new Exception("内部资源图片丢失！");
+        }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Application.Current.MainWindow.Close();
+            Application.Current.Shutdown();
         }
     }
 
