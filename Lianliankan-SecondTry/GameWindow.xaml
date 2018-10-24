@@ -142,7 +142,7 @@
                 <Button DockPanel.Dock="Left" Content="返回主菜单" FontSize="18" Margin="10,3" Padding="10,0"/>
                 <Button Content="提示" DockPanel.Dock="Left" FontSize="18" Margin="10,3" Padding="10,0"/>
                 <Button Content="重新开始" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0"/>
-                <Button Content="重新布局" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0"/>
+                <Button Content="重新打乱" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0" Click="Button_Click"/>
                 <TextBlock Text="倒计时" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </DockPanel>
             <!--<StackPanel Orientation="Horizontal">

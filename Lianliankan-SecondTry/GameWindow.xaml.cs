@@ -30,6 +30,8 @@ namespace Lianliankan_SecondTry
         private List<ImageInfo> allImageInfoNeeded = null;
         // 二维数组，记录图片在按钮上显示的位置
         private ImageInfo[,] imageInfoArray = null;
+        // 二维数组，记录按钮位置索引，以方便查找
+        private Button[,] buttonArray = null;
         // 判断第一个按钮是否按下
         private bool isFirstButtonClicked = false;
         // 记录第一个按下的按钮，以便与第二个按下的按钮进行配对
@@ -196,7 +198,7 @@ namespace Lianliankan_SecondTry
             {
                 buttons[i].Background = allImageInfoNeededRandomly[allRandomIndex[i]].Image;
                 allImageInfoNeededRandomly[allRandomIndex[i]]=SetLocation(buttons[i],allImageInfoNeededRandomly[allRandomIndex[i]]);
-                allImageInfoNeeded.Add(SetLocation(buttons[i], allImageInfoNeededRandomly[allRandomIndex[i]]));
+                allImageInfoNeeded.Add(allImageInfoNeededRandomly[allRandomIndex[i]]);
             }
         }
         /// <summary>
@@ -247,6 +249,22 @@ namespace Lianliankan_SecondTry
                 for (int j = 0; j < maxColumn+1; j++)
                 {
                     imageInfoArray[i, j] = allImageInfoNeeded[index];
+                    index++;
+                }
+            }
+        }
+        private void FillButtonArray()
+        {
+            List<Button> buttons = GetButtonList();
+            int maxRow = GetMaxRowIndex(buttons);
+            int maxColumn = GetMaxColumnIndex(buttons);
+            buttonArray = new Button[maxRow + 1, maxColumn + 1];
+            int index = 0;
+            for (int i = 0; i < maxRow + 1; i++)
+            {
+                for (int j = 0; j < maxColumn + 1; j++)
+                {
+                    buttonArray[i, j] = buttons[index];
                     index++;
                 }
             }
@@ -307,6 +325,22 @@ namespace Lianliankan_SecondTry
                     else availableChannels[i, j] = false;
                 }
             }
+        }
+        /// <summary>
+        /// 获取可用通道的行数
+        /// </summary>
+        /// <returns></returns>
+        private int GetAvailableRows()
+        {
+            return GetMaxRowIndex(GetButtonList()) + 3;
+        }
+        /// <summary>
+        /// 获取可用通道的列数
+        /// </summary>
+        /// <returns></returns>
+        private int GetAvailableColumns()
+        {
+            return GetMaxColumnIndex(GetButtonList()) + 3;
         }
         /// <summary>
         /// 判断两个按钮是否能够消除，大量的代码在此方法中，可以进行一些整合，但会使代码更复杂
@@ -1926,11 +1960,11 @@ namespace Lianliankan_SecondTry
                             // 继续完成列上的路径查找
                             for (int j = 0; j < Math.Abs(preRow - curRow) - 1; j++)
                             {
-                                if (availableChannels[j + curRow + 2, preColumn + 1] && j + curRow + 2 == preRow)
+                                if (availableChannels[j + preRow + 2, preColumn + 1] && j + preRow + 2 == curRow)
                                 {
                                     return true;
                                 }
-                                if (!availableChannels[j + curRow + 2, preColumn + 1])
+                                if (!availableChannels[j + preRow + 2, preColumn + 1])
                                 {
                                     break;
                                 }
@@ -1944,7 +1978,7 @@ namespace Lianliankan_SecondTry
                     // 继续完成列上的路径查找
                     for (int j = 0; j < Math.Abs(preRow - curRow) - 1; j++)
                     {
-                        if (availableChannels[j + curRow + 2, preColumn + 1] && j + curRow + 2 == preRow)
+                        if (availableChannels[j + preRow + 2, preColumn + 1] && j + preRow + 2 == curRow)
                         {
                             // 继续向上
                             for (int i = 0; i < preRow + 1; i++)
@@ -1969,7 +2003,7 @@ namespace Lianliankan_SecondTry
                                 }
                             }
                         }
-                        if (!availableChannels[j + curRow + 2, preColumn + 1])
+                        if (!availableChannels[j + preRow + 2, preColumn + 1])
                         {
                             break;
                         }
@@ -2388,6 +2422,75 @@ namespace Lianliankan_SecondTry
         }
         #endregion
 
+        #region 重新布局
+        private List<ImageInfo> GetRemainingImageList()
+        {
+            List<ImageInfo> remainingImages = new List<ImageInfo>();
+            // 可用通道的行数和列数
+            int availableRows = GetAvailableRows();
+            int availableColumns = GetAvailableColumns();
+
+            for (int i = 1; i <availableRows-1 ; i++)
+            {
+                for (int j = 1; j < availableColumns-1; j++)
+                {
+                    if (!availableChannels[i,j])
+                    {
+                        remainingImages.Add(imageInfoArray[i - 1, j - 1]);
+                    }
+                }
+            }
+            return remainingImages;
+        }
+        private List<Button> GetRemainingButtonList()
+        {
+            List<Button> remainingButtons = new List<Button>();
+            // 可用通道的行数和列数
+            int availableRows = GetAvailableRows();
+            int availableColumns = GetAvailableColumns();
+
+            for (int i = 1; i < availableRows - 1; i++)
+            {
+                for (int j = 1; j < availableColumns - 1; j++)
+                {
+                    if (!availableChannels[i, j])
+                    {
+                        remainingButtons.Add(buttonArray[i - 1, j - 1]);
+                    }
+                }
+            }
+            return remainingButtons;
+        }
+        private void RearrangeImageToUIRandomly()
+        {
+            List<ImageInfo> remainingImages = new List<ImageInfo>();
+            List<ImageInfo> remainingImagesRandomly = GetRemainingImageList();
+            List<Button> remainingButtons = GetRemainingButtonList();
+            List<int> randomIndexes = GetRanomIndexList(remainingImagesRandomly.Count);
+            for (int i = 0; i <remainingButtons.Count; i++)
+            {
+                remainingButtons[i].Background = remainingImagesRandomly[randomIndexes[i]].Image;
+                remainingImagesRandomly[randomIndexes[i]] = SetLocation(remainingButtons[i], remainingImagesRandomly[randomIndexes[i]]);
+                remainingImages.Add(remainingImagesRandomly[randomIndexes[i]]);
+            }
+
+            int maxRow = GetMaxRowIndex(GetButtonList());
+            int maxColumn = GetMaxColumnIndex(GetButtonList());
+            int index = 0;
+            for (int i = 0; i < maxRow + 1; i++)
+            {
+                for (int j = 0; j < maxColumn + 1; j++)
+                {
+                    if (!availableChannels[i+1, j+1])
+                    {
+                        imageInfoArray[i, j] = remainingImages[index];
+                        index++;
+                    } 
+                }
+            }
+        }
+        #endregion
+
 
         public GameWindow(int userSetRows, int userSetColumns, int imageNumbers, double height, double width)
         {
@@ -2402,14 +2505,13 @@ namespace Lianliankan_SecondTry
             SetGridColumns();
             AddAndSetButtonPosition();
 
-
             List<ImageInfo> imageInfos=GetImageInfoList();
             List<ImageInfo> doubleImageInfo = GetDoubleImageInfoList(imageInfos);
             List<Button> buttons = GetButtonList();
             AddImageToUIRandomly(doubleImageInfo, imageInfos, GetRanomIndexList, buttons);
             FillImageInfoArray();
             FillAvailableChannels();
-            
+            FillButtonArray();
 
             foreach (var item in buttons)
             {
@@ -2434,6 +2536,7 @@ namespace Lianliankan_SecondTry
                 }
             }
             
+            // 如果之前没有按钮按下
             if (!isFirstButtonClicked)
             {
                 isFirstButtonClicked = true;
@@ -2444,31 +2547,37 @@ namespace Lianliankan_SecondTry
             }
             else
             {
+                // 如果两次按下的按钮相同，消除之前对按钮的设定
                 if (button ==previousClickedButton)
                 {
                     button.BorderThickness = new Thickness(0);
                     previousClickedButton = null;
                     isFirstButtonClicked = false;
                 }
+                // 如果两次按下的按钮不同
                 else
                 {
+                    // 获取先前和当前按钮所附带的图片信息
                     ImageInfo previousImageInfo = imageInfoArray[GetRow(previousClickedButton), GetColumn(previousClickedButton)];
                     ImageInfo currentImageInfo = imageInfoArray[GetRow(button), GetColumn(button)];
+                    // 如果两张图片相同，而且CheckIfMatch方法返回True
                     if (previousImageInfo.Id==currentImageInfo.Id&& CheckIfMatch(previousClickedButton, button))
                     {
-
+                        // 在可用通道中将两个按钮相应位置上的元素设为True
                         availableChannels[GetRow(previousClickedButton) + 1, GetColumn(previousClickedButton) + 1] = true;
                         availableChannels[GetRow(button) + 1, GetColumn(button) + 1] = true;
 
+                        // 消除在判断过程中对按钮外观的影响
                         previousClickedButton.Background = new SolidColorBrush(Colors.Transparent);
                         button.Background = new SolidColorBrush(Colors.Transparent);
                         previousClickedButton.BorderThickness = new Thickness(0);
                         button.BorderThickness = new Thickness(0);
 
+                        // 恢复至没有按钮点击过的状态，禁用按钮
                         previousClickedButton.IsEnabled = false;
                         button.IsEnabled = false;
-                        
                     }
+                    // 如果不能满足消除的条件，在两个按钮上加一层红色的外边框
                     else
                     {
                         button.BorderBrush = new SolidColorBrush(Colors.Red);
@@ -2476,6 +2585,8 @@ namespace Lianliankan_SecondTry
                         previousClickedButton.BorderBrush = new SolidColorBrush(Colors.Red);
                         previousClickedButton.BorderThickness = new Thickness(5);
                     }
+
+                    // 恢复至没有按钮点击过的状态
                     previousClickedButton = null;
                     isFirstButtonClicked = false;
                 }
@@ -2507,6 +2618,20 @@ namespace Lianliankan_SecondTry
         private void Window_Closed(object sender, EventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RearrangeImageToUIRandomly();
+
+            List<Button> buttons = FindIfBorderThickernessEqualFive(GetButtonList());
+            if (buttons.Count == 1||buttons.Count==2)
+            {
+                foreach (var item in buttons)
+                {
+                    item.BorderThickness = new Thickness(0);
+                }
+            }
         }
     }
 
