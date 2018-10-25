@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Lianliankan_SecondTry"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="GameWindow" Closed="Window_Closed">
+        Title="GameWindow" Closed="Window_Closed" Background="Azure">
     <Window.Resources>
         <ImageBrush x:Key="image1_FullColor" ImageSource="/Resources/Images/aperture.png"/>
         <ImageBrush x:Key="image1_OneColor" ImageSource="/Resources/Images/aperture_OneColor.png"/>
@@ -117,14 +117,106 @@
             </Setter>
         </Style>
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FFFFE8E8"/>
+        <LinearGradientBrush x:Key="Button.MouseOver.Background" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFA0ECEC" Offset="0"/>
+            <GradientStop Color="#FFB9F5A2" Offset="1"/>
+        </LinearGradientBrush>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
         <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
         <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
         <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="GameCompleteBtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="50"/>
+            <Setter Property="FontSize" Value="35"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" CornerRadius="6">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Margin" Value="10,3"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF9ADAF1" Offset="0"/>
+                        <GradientStop Color="#FF56FFD9" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" CornerRadius="3">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -137,16 +229,16 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="2">
-            <ProgressBar x:Name="progressBar" Background="AliceBlue" BorderBrush="AliceBlue" BorderThickness="5" Value="50" Foreground="Aqua"/>
-            <DockPanel Height="45">
-                <Button DockPanel.Dock="Left" Content="返回主菜单" FontSize="18" Margin="10,3" Padding="10,0" Click="ReturnToManu_Click"/>
-                <Button Content="提示" DockPanel.Dock="Left" FontSize="18" Margin="10,3" Padding="10,0" Click="Prompt_Click"/>
-                <Button Content="重新开始" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0" Click="Restart_Click"/>
-                <Button Content="重新打乱" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0" Click="Relayout_Click"/>
-                <TextBlock x:Name="textbockTimeDown" Text="倒计时" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <ProgressBar x:Name="progressBar" Background="AliceBlue" BorderBrush="AliceBlue" BorderThickness="5" Value="0" Foreground="Aqua"/>
+            <DockPanel Height="45" Background="#FFFAFFF3">
+                <Button DockPanel.Dock="Left" Content="返回主菜单" Click="ReturnToManu_Click" Style="{DynamicResource ButtonStyle1}"/>
+                <Button Content="提示" DockPanel.Dock="Left" Click="Prompt_Click" Style="{DynamicResource ButtonStyle1}"/>
+                <Button Content="重新开始" DockPanel.Dock="Right" Click="Restart_Click" Style="{DynamicResource ButtonStyle1}"/>
+                <Button Content="重新打乱" DockPanel.Dock="Right" Click="Relayout_Click" Style="{DynamicResource ButtonStyle1}"/>
+                <TextBlock x:Name="textbockTimeDown" Text="倒计时" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF6DDEB8" MinWidth="90"/>
             </DockPanel>
         </StackPanel>
-        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="5" Background="Black" Grid.ColumnSpan="2"></GridSplitter>
+        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="4" Background="Black" Grid.ColumnSpan="2"></GridSplitter>
         <Grid x:Name="gamePanel" Margin="10" Grid.Row="2" Grid.Column="1">
             <Grid.Resources>
                 <Style TargetType="{x:Type Button}">

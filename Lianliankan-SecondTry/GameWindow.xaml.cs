@@ -28,6 +28,8 @@ namespace Lianliankan_SecondTry
         #endregion
 
         #region 私有字段
+        // 计时器
+        DispatcherTimer timer = null;
         // 决定是否退出程序，由于此窗口每次关闭时都会触发Closed事件，故用此bool字段决定Closed被触发时是否退出程序
         private bool IsWantToExitApp = true;
         // 判断是否处于游戏结束界面，来决定是否禁用一些按钮
@@ -2549,11 +2551,11 @@ namespace Lianliankan_SecondTry
         #region 计时器
         private void CountDown(int timeAvailable)
         {
-            DispatcherTimer timer = new DispatcherTimer();
+            timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             int seconds = timeAvailable * 60;
             DateTime timeLeftover = new DateTime(2018,10,25,0,timeAvailable,0);
-            MessageBox.Show(timeLeftover.ToString());
+            //MessageBox.Show(timeLeftover.ToString());
             timeLeftover.ToLocalTime();
             timer.Tick += (sender, e) =>
             {
@@ -2562,6 +2564,13 @@ namespace Lianliankan_SecondTry
                 {
                     CreateGameCompluteUI(false);
                     timer.Stop();
+                }
+
+                // 实时增加progressbar进度
+                double progress = 100 - (double)seconds / (timeAvailable * 60) * 100;
+                if (progress>=0&&progress<=100)
+                {
+                    progressBar.Value = progress;
                 }
                 timeLeftover = timeLeftover - new TimeSpan(0,0,1);
                 this.textbockTimeDown.Text = timeLeftover.ToString("mm:ss");
@@ -2607,6 +2616,9 @@ namespace Lianliankan_SecondTry
             }
 
             TextBlock textBlock = new TextBlock();
+            textBlock.VerticalAlignment = VerticalAlignment.Center;
+            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
+            textBlock.FontSize = 30d;
             Grid.SetColumnSpan(textBlock, 2);
             if (isWin)
             {
@@ -2615,11 +2627,13 @@ namespace Lianliankan_SecondTry
             else textBlock.Text = "时间到了哦，不要气馁，再试一次吧";
 
             Button returnToMenu = new Button();
+            returnToMenu.Style = (Style)FindResource("GameCompleteBtnStyle");
             returnToMenu.Content = "返回主菜单";
             Grid.SetRow(returnToMenu, 1);
             returnToMenu.Click += ReturnToManu_Click;
 
             Button retry = new Button();
+            retry.Style = (Style)FindResource("GameCompleteBtnStyle");
             retry.Content = "再玩一次";
             Grid.SetRow(retry, 1);
             Grid.SetColumn(retry, 1);
@@ -2845,6 +2859,7 @@ namespace Lianliankan_SecondTry
 
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
+            progressBar.Value = 0;
             // 初始化私有字段
             allImageInfoNeeded = null;
             imageInfoArray = null;
@@ -2871,6 +2886,7 @@ namespace Lianliankan_SecondTry
                 item.MouseEnter += Item_MouseEnter;
                 item.MouseLeave += Item_MouseLeave;
             }
+            timer.Stop();
             CountDown(TimeAvailable);
 
             IsInGameComplete = false;

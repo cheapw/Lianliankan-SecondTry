@@ -181,7 +181,7 @@ namespace Lianliankan_SecondTry
             }
 
             timeAvailable = MainWindow.GetAvailableTime(userSetRows, userSetColumns);
-            double width = 400, height = 400;
+            double width = 450, height = 400;
             width += (userSetColumns - 6) * 60;
             height += (userSetRows - 6) * 55;
 
