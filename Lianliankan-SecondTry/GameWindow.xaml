@@ -141,9 +141,9 @@
             <DockPanel Height="45">
                 <Button DockPanel.Dock="Left" Content="返回主菜单" FontSize="18" Margin="10,3" Padding="10,0" Click="ReturnToManu_Click"/>
                 <Button Content="提示" DockPanel.Dock="Left" FontSize="18" Margin="10,3" Padding="10,0" Click="Prompt_Click"/>
-                <Button Content="重新开始" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0"/>
+                <Button Content="重新开始" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0" Click="Restart_Click"/>
                 <Button Content="重新打乱" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0" Click="Relayout_Click"/>
-                <TextBlock Text="倒计时" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="textbockTimeDown" Text="倒计时" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </DockPanel>
         </StackPanel>
         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="5" Background="Black" Grid.ColumnSpan="2"></GridSplitter>

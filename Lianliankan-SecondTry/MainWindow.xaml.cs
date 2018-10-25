@@ -20,9 +20,8 @@ namespace Lianliankan_SecondTry
     /// </summary>
     public partial class MainWindow : Window
     {
-        //GameWindow gameWindow = null;
         DifficultySettingWindow difficultySettingWindow = null;
-        #region 用户自定义方法
+        #region 自定义方法
         internal static int GetImageNumbers(int rows,int column)
         {
             int imaNum = 0;
@@ -34,6 +33,12 @@ namespace Lianliankan_SecondTry
             imaNum = Convert.ToInt32(Math.Round(rows * column/2/2 * 0.9));
             if (imaNum < 1) imaNum = 1;
             return imaNum;
+        }
+        internal static int GetAvailableTime(int rows,int column)
+        {
+            int product = rows * column;
+            int timeAvailable = Convert.ToInt32(Math.Round((double)product / 15));
+            return timeAvailable;
         }
         #endregion
         public MainWindow()
@@ -54,6 +59,7 @@ namespace Lianliankan_SecondTry
             int userSetColumns = 8;
             int userSetRows = 6;
             int imageNumbers = 11;
+            int timeAvailable = 3;
 
             double width = 500, height = 500;
             // 设定中等难度
@@ -81,11 +87,12 @@ namespace Lianliankan_SecondTry
             }
 
             imageNumbers = GetImageNumbers(userSetRows, userSetColumns);
+            timeAvailable = GetAvailableTime(userSetRows, userSetColumns);
 
             width += (userSetColumns - 6) * 60;
             height += (userSetRows - 6) * 55;
 
-            GameWindow gameWindow = new GameWindow(userSetRows, userSetColumns, imageNumbers, height, width);
+            GameWindow gameWindow = new GameWindow(userSetRows, userSetColumns, imageNumbers, timeAvailable, height, width);
             this.Hide();
             gameWindow.Show();
         }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Lianliankan_SecondTry
 {
@@ -23,11 +24,14 @@ namespace Lianliankan_SecondTry
         public int UserSetRows { get; set; }
         public int UserSetColumns { get; set; }
         public int ImageNumbers { get; set; }
+        public int TimeAvailable { get; set; }
         #endregion
 
         #region 私有字段
         // 决定是否退出程序，由于此窗口每次关闭时都会触发Closed事件，故用此bool字段决定Closed被触发时是否退出程序
         private bool IsWantToExitApp = true;
+        // 判断是否处于游戏结束界面，来决定是否禁用一些按钮
+        private bool IsInGameComplete = false;
         // 一维数组，所有所需的图片，相同的图片可能有数张，数量为偶数，图片总数与按钮总数相同，且按照添加进按钮的顺序排列
         private List<ImageInfo> allImageInfoNeeded = null;
         // 二维数组，记录图片在按钮上显示的位置
@@ -2542,13 +2546,104 @@ namespace Lianliankan_SecondTry
         }
         #endregion
 
+        #region 计时器
+        private void CountDown(int timeAvailable)
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            int seconds = timeAvailable * 60;
+            DateTime timeLeftover = new DateTime(2018,10,25,0,timeAvailable,0);
+            MessageBox.Show(timeLeftover.ToString());
+            timeLeftover.ToLocalTime();
+            timer.Tick += (sender, e) =>
+            {
+                seconds--;
+                if (seconds==0)
+                {
+                    CreateGameCompluteUI(false);
+                    timer.Stop();
+                }
+                timeLeftover = timeLeftover - new TimeSpan(0,0,1);
+                this.textbockTimeDown.Text = timeLeftover.ToString("mm:ss");
+            };
+            timer.IsEnabled = true;
+        }
 
-        public GameWindow(int userSetRows, int userSetColumns, int imageNumbers, double height, double width)
+        #endregion
+
+        #region 游戏结束界面提示
+        private bool CheckIfAllElementEliminated()
+        {
+            int availableRows = GetAvailableRows();
+            int availableColumns = GetAvailableColumns();
+
+            for (int i = 1; i < availableRows-1; i++)
+            {
+                for (int j = 1; j < availableColumns-1; j++)
+                {
+                    if (availableChannels[i,j]==false)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        private void CreateGameCompluteUI(bool isWin)
+        {
+            gamePanel.ColumnDefinitions.Clear();
+            gamePanel.RowDefinitions.Clear();
+            gamePanel.Children.Clear();
+
+            for (int i = 0; i < 2; i++)
+            {
+                RowDefinition row = new RowDefinition();
+                gamePanel.RowDefinitions.Add(row);
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                ColumnDefinition column = new ColumnDefinition();
+                gamePanel.ColumnDefinitions.Add(column);
+            }
+
+            TextBlock textBlock = new TextBlock();
+            Grid.SetColumnSpan(textBlock, 2);
+            if (isWin)
+            {
+                textBlock.Text = "恭喜挑战成功，啦啦啦！";
+            }
+            else textBlock.Text = "时间到了哦，不要气馁，再试一次吧";
+
+            Button returnToMenu = new Button();
+            returnToMenu.Content = "返回主菜单";
+            Grid.SetRow(returnToMenu, 1);
+            returnToMenu.Click += ReturnToManu_Click;
+
+            Button retry = new Button();
+            retry.Content = "再玩一次";
+            Grid.SetRow(retry, 1);
+            Grid.SetColumn(retry, 1);
+            retry.Click += (sender, e) =>
+            {
+                SetGridColumns();
+                SetGridRows();
+                Restart_Click(sender, e);
+            };
+
+            gamePanel.Children.Add(textBlock);
+            gamePanel.Children.Add(returnToMenu);
+            gamePanel.Children.Add(retry);
+            IsInGameComplete = true;
+        }
+        #endregion
+
+        public GameWindow(int userSetRows, int userSetColumns, int imageNumbers, int timeAvailable, double height, double width)
         {
             InitializeComponent();
             this.UserSetRows = userSetRows;
             this.UserSetColumns = userSetColumns;
             this.ImageNumbers = imageNumbers;
+            this.TimeAvailable = timeAvailable;
             this.Height = height;
             this.Width = width;
 
@@ -2570,7 +2665,7 @@ namespace Lianliankan_SecondTry
                 item.MouseEnter += Item_MouseEnter;
                 item.MouseLeave += Item_MouseLeave;
             }
-
+            CountDown(timeAvailable);
         }
 
         private void Item_Click(object sender, RoutedEventArgs e)
@@ -2642,11 +2737,26 @@ namespace Lianliankan_SecondTry
                     isFirstButtonClicked = false;
                 }
             }
+
+            // 检查是否所有的按钮已被消除
+            if (CheckIfAllElementEliminated())
+            {
+                CreateGameCompluteUI(true);
+            }
+            
         }
         private void Item_MouseEnter(object sender, MouseEventArgs e)
         {
             Button button = sender as Button;
-            int imageId = imageInfoArray[GetRow(button), GetColumn(button)].Id;
+            int imageId = 0;
+            try
+            {
+                imageId = imageInfoArray[GetRow(button), GetColumn(button)].Id;
+            }
+            catch (Exception)
+            {
+                return;
+            }
             ImageBrush imageBrush=(ImageBrush)TryFindResource("image" + imageId + "_OneColor");
             if (imageBrush != null)
             {
@@ -2657,7 +2767,16 @@ namespace Lianliankan_SecondTry
         private void Item_MouseLeave(object sender, MouseEventArgs e)
         {
             Button button = sender as Button;
-            int imageId = imageInfoArray[GetRow(button), GetColumn(button)].Id;
+            int imageId = 0;
+            try
+            {
+                imageId = imageInfoArray[GetRow(button), GetColumn(button)].Id;
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            
             ImageBrush imageBrush = (ImageBrush)TryFindResource("image" + imageId + "_FullColor");
             if (imageBrush != null)
             {
@@ -2676,6 +2795,11 @@ namespace Lianliankan_SecondTry
 
         private void Relayout_Click(object sender, RoutedEventArgs e)
         {
+            if (IsInGameComplete)
+            {
+                return;
+            }
+
             RearrangeImageToUIRandomly();
 
             List<Button> buttons = FindIfBorderThickernessEqualFive(GetButtonList());
@@ -2684,12 +2808,18 @@ namespace Lianliankan_SecondTry
                 foreach (var item in buttons)
                 {
                     item.BorderThickness = new Thickness(0);
+                    previousClickedButton = null;
+                    isFirstButtonClicked = false;
                 }
             }
         }
 
         private void Prompt_Click(object sender, RoutedEventArgs e)
         {
+            if (IsInGameComplete)
+            {
+                return;
+            }
             Button[] buttons = TryToPrompt();
             if (buttons!=null)
             {
@@ -2711,6 +2841,39 @@ namespace Lianliankan_SecondTry
             Application.Current.MainWindow.Show();
             IsWantToExitApp = false;
             this.Close();
+        }
+
+        private void Restart_Click(object sender, RoutedEventArgs e)
+        {
+            // 初始化私有字段
+            allImageInfoNeeded = null;
+            imageInfoArray = null;
+            buttonArray = null;
+            isFirstButtonClicked = false;
+            previousClickedButton = null;
+            availableChannels = null;
+
+            SetGridRows();
+            SetGridColumns();
+            AddAndSetButtonPosition();
+
+            List<ImageInfo> imageInfos = GetImageInfoList();
+            List<ImageInfo> doubleImageInfo = GetDoubleImageInfoList(imageInfos);
+            List<Button> buttons = GetButtonList();
+            AddImageToUIRandomly(doubleImageInfo, imageInfos, GetRanomIndexList, buttons);
+            FillImageInfoArray();
+            FillAvailableChannels();
+            FillButtonArray();
+
+            foreach (var item in buttons)
+            {
+                item.Click += Item_Click;
+                item.MouseEnter += Item_MouseEnter;
+                item.MouseLeave += Item_MouseLeave;
+            }
+            CountDown(TimeAvailable);
+
+            IsInGameComplete = false;
         }
     }
 

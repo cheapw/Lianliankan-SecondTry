@@ -170,7 +170,7 @@ namespace Lianliankan_SecondTry
         }
         private void StartGame_Click(object sender, RoutedEventArgs e)
         {
-            int userSetRows, userSetColumns, imageNumbers;
+            int userSetRows, userSetColumns, imageNumbers,timeAvailable;
             userSetRows = (int)verticalSlider.Value;
             userSetColumns = (int)horizontalSlider.Value;
 
@@ -180,13 +180,14 @@ namespace Lianliankan_SecondTry
                 return;
             }
 
+            timeAvailable = MainWindow.GetAvailableTime(userSetRows, userSetColumns);
             double width = 400, height = 400;
             width += (userSetColumns - 6) * 60;
             height += (userSetRows - 6) * 55;
 
             imageNumbers = MainWindow.GetImageNumbers(userSetRows, userSetColumns);
 
-            GameWindow gameWindow = new GameWindow(userSetRows, userSetColumns, imageNumbers, height, width);
+            GameWindow gameWindow = new GameWindow(userSetRows, userSetColumns, imageNumbers, timeAvailable, height, width);
             this.Hide();
             gameWindow.Show();
         }
