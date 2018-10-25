@@ -139,25 +139,12 @@
         <StackPanel Grid.ColumnSpan="2">
             <ProgressBar x:Name="progressBar" Background="AliceBlue" BorderBrush="AliceBlue" BorderThickness="5" Value="50" Foreground="Aqua"/>
             <DockPanel Height="45">
-                <Button DockPanel.Dock="Left" Content="返回主菜单" FontSize="18" Margin="10,3" Padding="10,0"/>
-                <Button Content="提示" DockPanel.Dock="Left" FontSize="18" Margin="10,3" Padding="10,0"/>
+                <Button DockPanel.Dock="Left" Content="返回主菜单" FontSize="18" Margin="10,3" Padding="10,0" Click="ReturnToManu_Click"/>
+                <Button Content="提示" DockPanel.Dock="Left" FontSize="18" Margin="10,3" Padding="10,0" Click="Prompt_Click"/>
                 <Button Content="重新开始" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0"/>
-                <Button Content="重新打乱" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0" Click="Button_Click"/>
+                <Button Content="重新打乱" DockPanel.Dock="Right" FontSize="18" Margin="10,3" Padding="10,0" Click="Relayout_Click"/>
                 <TextBlock Text="倒计时" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </DockPanel>
-            <!--<StackPanel Orientation="Horizontal">
-                <Button MinWidth="100" MinHeight="35">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Resources/GameUIAction/61.png"/>
-                    </Button.Background>
-                </Button>
-                <Button MinWidth="100" MinHeight="35">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Resources/GameUIAction/33.png"/>
-                    </Button.Background>
-                </Button>
-                <TextBlock Text="3:00" FontSize="45" Margin="25,5"/>
-            </StackPanel>-->
         </StackPanel>
         <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="5" Background="Black" Grid.ColumnSpan="2"></GridSplitter>
         <Grid x:Name="gamePanel" Margin="10" Grid.Row="2" Grid.Column="1">

@@ -26,6 +26,8 @@ namespace Lianliankan_SecondTry
         #endregion
 
         #region 私有字段
+        // 决定是否退出程序，由于此窗口每次关闭时都会触发Closed事件，故用此bool字段决定Closed被触发时是否退出程序
+        private bool IsWantToExitApp = true;
         // 一维数组，所有所需的图片，相同的图片可能有数张，数量为偶数，图片总数与按钮总数相同，且按照添加进按钮的顺序排列
         private List<ImageInfo> allImageInfoNeeded = null;
         // 二维数组，记录图片在按钮上显示的位置
@@ -1960,11 +1962,11 @@ namespace Lianliankan_SecondTry
                             // 继续完成列上的路径查找
                             for (int j = 0; j < Math.Abs(preRow - curRow) - 1; j++)
                             {
-                                if (availableChannels[j + preRow + 2, preColumn + 1] && j + preRow + 2 == curRow)
+                                if (availableChannels[j + preRow + 2, curColumn + 1] && j + preRow + 2 == curRow)
                                 {
                                     return true;
                                 }
-                                if (!availableChannels[j + preRow + 2, preColumn + 1])
+                                if (!availableChannels[j + preRow + 2, curColumn + 1])
                                 {
                                     break;
                                 }
@@ -1978,7 +1980,7 @@ namespace Lianliankan_SecondTry
                     // 继续完成列上的路径查找
                     for (int j = 0; j < Math.Abs(preRow - curRow) - 1; j++)
                     {
-                        if (availableChannels[j + preRow + 2, preColumn + 1] && j + preRow + 2 == curRow)
+                        if (availableChannels[j + preRow + 2, curColumn + 1] && j + preRow + 2 == curRow)
                         {
                             // 继续向上
                             for (int i = 0; i < preRow + 1; i++)
@@ -2003,7 +2005,7 @@ namespace Lianliankan_SecondTry
                                 }
                             }
                         }
-                        if (!availableChannels[j + preRow + 2, preColumn + 1])
+                        if (!availableChannels[j + preRow + 2, curColumn + 1])
                         {
                             break;
                         }
@@ -2422,7 +2424,7 @@ namespace Lianliankan_SecondTry
         }
         #endregion
 
-        #region 重新布局
+        #region 重新打乱布局
         private List<ImageInfo> GetRemainingImageList()
         {
             List<ImageInfo> remainingImages = new List<ImageInfo>();
@@ -2488,6 +2490,55 @@ namespace Lianliankan_SecondTry
                     } 
                 }
             }
+        }
+        #endregion
+
+        #region 提示按钮
+        private Button[] TryToPrompt()
+        {
+            Button button1, button2;
+            ImageInfo image1, image2;
+
+            List<Button> remainingButtons = new List<Button>();
+            // 可用通道的行数和列数
+            int availableRows = GetAvailableRows();
+            int availableColumns = GetAvailableColumns();
+
+            for (int i = 1; i < availableRows - 1; i++)
+            {
+                for (int j = 1; j < availableColumns - 1; j++)
+                {
+                    if (!availableChannels[i, j])
+                    {
+                        remainingButtons.Add(buttonArray[i - 1, j - 1]);
+                    }
+                }
+            }
+
+            for (int i = 0; i < remainingButtons.Count; i++)
+            {
+                for (int j = 0; j < remainingButtons.Count; j++)
+                {
+                    if (i==j)
+                    {
+                        continue;
+                    }
+                    button1 = remainingButtons[i];
+                    button2 = remainingButtons[j];
+                    image1 = imageInfoArray[GetRow(button1), GetColumn(button1)];
+                    image2 = imageInfoArray[GetRow(button2), GetColumn(button2)];
+                    if (image1.Id==image2.Id)
+                    {
+                        bool isMatched=CheckIfMatch(button1, button2);
+                        if (isMatched)
+                        {
+                            return new Button []{ button1, button2 };
+                        }
+                    }
+
+                }
+            }
+            return null;
         }
         #endregion
 
@@ -2617,10 +2668,13 @@ namespace Lianliankan_SecondTry
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Application.Current.Shutdown();
+            if (IsWantToExitApp)
+            {
+                Application.Current.Shutdown();
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Relayout_Click(object sender, RoutedEventArgs e)
         {
             RearrangeImageToUIRandomly();
 
@@ -2632,6 +2686,31 @@ namespace Lianliankan_SecondTry
                     item.BorderThickness = new Thickness(0);
                 }
             }
+        }
+
+        private void Prompt_Click(object sender, RoutedEventArgs e)
+        {
+            Button[] buttons = TryToPrompt();
+            if (buttons!=null)
+            {
+                buttons[0].BorderBrush = new SolidColorBrush(Colors.Blue);
+                buttons[0].BorderThickness = new Thickness(5);
+                buttons[1].BorderBrush = new SolidColorBrush(Colors.Blue);
+                buttons[1].BorderThickness = new Thickness(5);
+            }
+            else
+            {
+                MessageBox.Show("已经没有可以配对的按钮啦，系统自动为你打乱顺序！");
+                Relayout_Click(sender, e);
+            }
+        }
+
+        private void ReturnToManu_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            Application.Current.MainWindow.Show();
+            IsWantToExitApp = false;
+            this.Close();
         }
     }
 

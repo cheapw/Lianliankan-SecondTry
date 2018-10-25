@@ -193,10 +193,7 @@ namespace Lianliankan_SecondTry
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            if (Application.Current.MainWindow!=null)
-            {
-                Application.Current.MainWindow.Close();
-            }
+            Application.Current.Shutdown();
         }
 
         private void slider1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
