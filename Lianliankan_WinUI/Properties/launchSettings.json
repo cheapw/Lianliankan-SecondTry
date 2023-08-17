@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Lianliankan_WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Lianliankan_WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

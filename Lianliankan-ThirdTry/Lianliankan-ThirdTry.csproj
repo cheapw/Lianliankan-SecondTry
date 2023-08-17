@@ -1,0 +1,510 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>Lianliankan_ThirdTry</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>20181025085130381_easyicon_net_128.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\GameUIAction\19.png" />
+    <None Remove="Resources\GameUIAction\20.png" />
+    <None Remove="Resources\GameUIAction\33.png" />
+    <None Remove="Resources\GameUIAction\34.png" />
+    <None Remove="Resources\GameUIAction\35.png" />
+    <None Remove="Resources\GameUIAction\42.png" />
+    <None Remove="Resources\GameUIAction\43.png" />
+    <None Remove="Resources\GameUIAction\48.png" />
+    <None Remove="Resources\GameUIAction\50.png" />
+    <None Remove="Resources\GameUIAction\51.png" />
+    <None Remove="Resources\GameUIAction\52.png" />
+    <None Remove="Resources\GameUIAction\56.png" />
+    <None Remove="Resources\GameUIAction\57.png" />
+    <None Remove="Resources\GameUIAction\58.png" />
+    <None Remove="Resources\GameUIAction\59.png" />
+    <None Remove="Resources\GameUIAction\61.png" />
+    <None Remove="Resources\GameUIAction\62.png" />
+    <None Remove="Resources\GameUIAction\86.png" />
+    <None Remove="Resources\GameUIAction\batteryfull.png" />
+    <None Remove="Resources\GameUIAction\batterylow.png" />
+    <None Remove="Resources\GameUIAction\brightness.png" />
+    <None Remove="Resources\GameUIAction\hourglass.png" />
+    <None Remove="Resources\GameUIAction\ic_cached_black_48dp.png" />
+    <None Remove="Resources\GameUIAction\ic_cached_grey600_48dp.png" />
+    <None Remove="Resources\GameUIAction\ic_cached_white_48dp.png" />
+    <None Remove="Resources\GameUIAction\magicwand.png" />
+    <None Remove="Resources\Images\aperture.png" />
+    <None Remove="Resources\Images\aperture_OneColor.png" />
+    <None Remove="Resources\Images\arrow-down.png" />
+    <None Remove="Resources\Images\arrow-down_OneColor.png" />
+    <None Remove="Resources\Images\arrow-up.png" />
+    <None Remove="Resources\Images\arrow-up_OneColor.png" />
+    <None Remove="Resources\Images\art.png" />
+    <None Remove="Resources\Images\art_OneColor.png" />
+    <None Remove="Resources\Images\bike.png" />
+    <None Remove="Resources\Images\bike_OneColor.png" />
+    <None Remove="Resources\Images\blimp.png" />
+    <None Remove="Resources\Images\blimp_OneColor.png" />
+    <None Remove="Resources\Images\bomb.png" />
+    <None Remove="Resources\Images\bomb_OneColor.png" />
+    <None Remove="Resources\Images\brightness.png" />
+    <None Remove="Resources\Images\brightness_OneColor.png" />
+    <None Remove="Resources\Images\brush-pencil.png" />
+    <None Remove="Resources\Images\brush-pencil_OneColor.png" />
+    <None Remove="Resources\Images\calendar.png" />
+    <None Remove="Resources\Images\calendar_OneColor.png" />
+    <None Remove="Resources\Images\camera.png" />
+    <None Remove="Resources\Images\camera_OneColor.png" />
+    <None Remove="Resources\Images\chat.png" />
+    <None Remove="Resources\Images\chat_OneColor.png" />
+    <None Remove="Resources\Images\compass.png" />
+    <None Remove="Resources\Images\compass_OneColor.png" />
+    <None Remove="Resources\Images\computer.png" />
+    <None Remove="Resources\Images\computer_OneColor.png" />
+    <None Remove="Resources\Images\contacts.png" />
+    <None Remove="Resources\Images\contacts_OneColor.png" />
+    <None Remove="Resources\Images\die.png" />
+    <None Remove="Resources\Images\die_OneColor.png" />
+    <None Remove="Resources\Images\dolly.png" />
+    <None Remove="Resources\Images\dolly_OneColor.png" />
+    <None Remove="Resources\Images\fashion.png" />
+    <None Remove="Resources\Images\fashion_OneColor.png" />
+    <None Remove="Resources\Images\filmreel.png" />
+    <None Remove="Resources\Images\filmreel_OneColor.png" />
+    <None Remove="Resources\Images\gamecontroller.png" />
+    <None Remove="Resources\Images\gamecontroller_OneColor.png" />
+    <None Remove="Resources\Images\gas.png" />
+    <None Remove="Resources\Images\gas_OneColor.png" />
+    <None Remove="Resources\Images\gear.png" />
+    <None Remove="Resources\Images\gear_OneColor.png" />
+    <None Remove="Resources\Images\genius.png" />
+    <None Remove="Resources\Images\genius_OneColor.png" />
+    <None Remove="Resources\Images\global.png" />
+    <None Remove="Resources\Images\global_OneColor.png" />
+    <None Remove="Resources\Images\interstate.png" />
+    <None Remove="Resources\Images\interstate_OneColor.png" />
+    <None Remove="Resources\Images\key.png" />
+    <None Remove="Resources\Images\keyboard.png" />
+    <None Remove="Resources\Images\keyboard_OneColor.png" />
+    <None Remove="Resources\Images\key_OneColor.png" />
+    <None Remove="Resources\Images\locked.png" />
+    <None Remove="Resources\Images\locked_OneColor.png" />
+    <None Remove="Resources\Images\mail.png" />
+    <None Remove="Resources\Images\mail_OneColor.png" />
+    <None Remove="Resources\Images\megaphone.png" />
+    <None Remove="Resources\Images\megaphone_OneColor.png" />
+    <None Remove="Resources\Images\mic.png" />
+    <None Remove="Resources\Images\mic_OneColor.png" />
+    <None Remove="Resources\Images\news.png" />
+    <None Remove="Resources\Images\news_OneColor.png" />
+    <None Remove="Resources\Images\paintcan.png" />
+    <None Remove="Resources\Images\paintcan_OneColor.png" />
+    <None Remove="Resources\Images\parachute.png" />
+    <None Remove="Resources\Images\parachute_OneColor.png" />
+    <None Remove="Resources\Images\power.png" />
+    <None Remove="Resources\Images\power_OneColor.png" />
+    <None Remove="Resources\Images\present.png" />
+    <None Remove="Resources\Images\present_OneColor.png" />
+    <None Remove="Resources\Images\racingflags.png" />
+    <None Remove="Resources\Images\racingflags_OneColor.png" />
+    <None Remove="Resources\Images\radio.png" />
+    <None Remove="Resources\Images\radio_OneColor.png" />
+    <None Remove="Resources\Images\rocket.png" />
+    <None Remove="Resources\Images\rocket_OneColor.png" />
+    <None Remove="Resources\Images\sailboat.png" />
+    <None Remove="Resources\Images\sailboat_OneColor.png" />
+    <None Remove="Resources\Images\scissors.png" />
+    <None Remove="Resources\Images\scissors_OneColor.png" />
+    <None Remove="Resources\Images\shoeprints.png" />
+    <None Remove="Resources\Images\shoeprints_OneColor.png" />
+    <None Remove="Resources\Images\smartphone.png" />
+    <None Remove="Resources\Images\smartphone_OneColor.png" />
+    <None Remove="Resources\Images\stack.png" />
+    <None Remove="Resources\Images\stack_OneColor.png" />
+    <None Remove="Resources\Images\toolbox.png" />
+    <None Remove="Resources\Images\toolbox_OneColor.png" />
+    <None Remove="Resources\Images\tools.png" />
+    <None Remove="Resources\Images\tools_OneColor.png" />
+    <None Remove="Resources\Images\trophy.png" />
+    <None Remove="Resources\Images\trophy_OneColor.png" />
+    <None Remove="Resources\Images\umbrella.png" />
+    <None Remove="Resources\Images\umbrella_OneColor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="20181025085130381_easyicon_net_128.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\GameUIAction\19.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\20.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\33.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\34.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\35.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\42.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\43.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\48.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\50.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\51.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\52.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\56.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\57.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\58.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\59.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\61.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\62.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\86.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\batteryfull.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\batterylow.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\brightness.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\hourglass.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\ic_cached_black_48dp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\ic_cached_grey600_48dp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\ic_cached_white_48dp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\GameUIAction\magicwand.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\aperture.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\aperture_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\arrow-down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\arrow-down_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\arrow-up.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\arrow-up_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\art.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\art_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\bike.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\bike_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\blimp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\blimp_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\bomb.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\bomb_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\brightness.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\brightness_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\brush-pencil.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\brush-pencil_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\calendar.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\calendar_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\camera.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\camera_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\chat.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\chat_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\compass.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\compass_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\computer.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\computer_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\contacts.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\contacts_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\die.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\die_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\dolly.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\dolly_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\fashion.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\fashion_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\filmreel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\filmreel_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\gamecontroller.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\gamecontroller_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\gas.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\gas_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\gear.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\gear_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\genius.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\genius_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\global.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\global_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\interstate.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\interstate_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\key.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\keyboard.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\keyboard_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\key_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\locked.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\locked_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\mail.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\mail_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\megaphone.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\megaphone_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\mic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\mic_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\news.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\news_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\paintcan.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\paintcan_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\parachute.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\parachute_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\power.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\power_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\present.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\present_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\racingflags.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\racingflags_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\radio.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\radio_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\rocket.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\rocket_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\sailboat.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\sailboat_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\scissors.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\scissors_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\shoeprints.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\shoeprints_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smartphone.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\smartphone_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\stack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\stack_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\toolbox.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\toolbox_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\tools.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\tools_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\trophy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\trophy_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\umbrella.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\umbrella_OneColor.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
