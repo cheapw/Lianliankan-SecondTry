@@ -6,10 +6,80 @@
     xmlns:local="using:Lianliankan_WinUI.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    >
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="White" Offset="0"/>
+            <GradientStop Color="#FF62E0E0" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
 
-    <Grid>
-
-    </Grid>
+    <Page.Resources>
+        <Style x:Key="GradientButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Margin" Value="36,6"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFCAF5F3" Offset="0"/>
+                        <GradientStop Color="#FF48FFFF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <StackPanel VerticalAlignment="Center" Margin="65,0">
+        <TextBlock Text="欢乐连连看" FontSize="60" HorizontalAlignment="Center" Margin="0,0,0,35"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="选择难度，开始游戏：" FontSize="28" Margin="10" HorizontalAlignment="Center"/>
+                <Button Content="简单" Tag="0" Click="Button_Click" Style="{StaticResource GradientButtonStyle}"/>
+                <Button Content="中等" Tag="1" Click="Button_Click" Style="{StaticResource GradientButtonStyle}"/>
+                <Button Content="困难" Tag="2" Click="Button_Click" Style="{StaticResource GradientButtonStyle}"/>
+                <Button Content="自定义" Tag="3" Click="Button_Click" Style="{StaticResource GradientButtonStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="排行榜" FontSize="40" HorizontalAlignment="Center"/>
+                <controls:DataGrid  x:Name="dgRank"
+                    Grid.Row="1"
+                    Margin="12"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    HorizontalScrollBarVisibility="Visible"
+                    VerticalScrollBarVisibility="Visible"
+                    AlternatingRowBackground="Transparent"
+                    AreRowDetailsFrozen="False"
+                    AreRowGroupHeadersFrozen="True"
+                    AutoGenerateColumns="False"
+                    CanUserSortColumns="False"
+                    CanUserReorderColumns="True"
+                    CanUserResizeColumns="True"
+                    ColumnHeaderHeight="32"
+                    MaxColumnWidth="400"
+                    FrozenColumnCount="0"
+                    GridLinesVisibility="All"
+                    HeadersVisibility="Column"
+                    IsReadOnly="False"
+                    RowDetailsVisibilityMode="Collapsed"
+                    SelectionMode="Extended"
+                    RowGroupHeaderPropertyNameAlternative="Range">
+                    <controls:DataGrid.Columns>
+                        <controls:DataGridTextColumn Header="排名" Binding="{Binding Rank}" Tag="Rank" />
+                        <controls:DataGridTextColumn Header="分数" Binding="{Binding Mark}" Tag="Mark" />
+                        <controls:DataGridTextColumn Header="完成时间" Binding="{Binding CompleteTime}" Tag="CompleteTime" />
+                    </controls:DataGrid.Columns>
+                </controls:DataGrid>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
 </Page>

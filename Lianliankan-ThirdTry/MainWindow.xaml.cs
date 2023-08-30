@@ -63,19 +63,19 @@ namespace Lianliankan_ThirdTry
 
             double width = 500, height = 500;
             // 设定中等难度
-            if ((string)((sender as Button).Tag) == "1")
+            if ((string?)((sender as Button)?.Tag) == "1")
             {
                 userSetRows = 7;
                 userSetColumns = 10;
             }
             // 设定困难难度
-            if ((string)((sender as Button).Tag) == "2")
+            if ((string?)((sender as Button)?.Tag) == "2")
             {
                 userSetRows = 9;
                 userSetColumns = 12;
             }
             // 自定义难度跳转到自定义窗口
-            if ((string)((sender as Button).Tag) == "3")
+            if ((string?)((sender as Button)?.Tag) == "3")
             {
                 if (difficultySettingWindow == null)
                 {

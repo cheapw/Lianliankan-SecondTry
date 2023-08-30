@@ -27,5 +27,10 @@ namespace Lianliankan_WinUI.Pages
         {
             this.InitializeComponent();
         }
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainMenuPage));
+        }
     }
 }
