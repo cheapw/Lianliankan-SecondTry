@@ -24,27 +24,6 @@ namespace Lianliankan_WinUI.Pages
     /// </summary>
     public sealed partial class MainMenuPage : Page
     {
-        DifficultySettingPage difficultySettingPage = null;
-        #region 自定义方法
-        internal static int GetImageNumbers(int rows, int column)
-        {
-            int imaNum = 0;
-            // 以下三种情况根据下面的式子计算的值均为1，若图片数量为2会使游戏更丰富
-            if ((rows == 2 && column == 2) || (rows == 3 && column == 2) || (rows == 2 && column == 3))
-            {
-                return 2;
-            }
-            imaNum = Convert.ToInt32(Math.Round(rows * column / 2 / 2 * 0.9));
-            if (imaNum < 1) imaNum = 1;
-            return imaNum;
-        }
-        internal static int GetAvailableTime(int rows, int column)
-        {
-            int product = rows * column;
-            int timeAvailable = Convert.ToInt32(Math.Round((double)product / 15));
-            return timeAvailable;
-        }
-        #endregion
         public MainMenuPage()
         {
             this.InitializeComponent();
@@ -62,10 +41,7 @@ namespace Lianliankan_WinUI.Pages
             // 简单难度默认值
             int userSetColumns = 8;
             int userSetRows = 6;
-            int imageNumbers = 11;
-            int timeAvailable = 3;
 
-            double width = 500, height = 500;
             // 设定中等难度
             if ((string)((sender as Button).Tag) == "1")
             {
@@ -81,35 +57,69 @@ namespace Lianliankan_WinUI.Pages
             // 自定义难度跳转到自定义窗口
             if ((string)((sender as Button).Tag) == "3")
             {
-                if (difficultySettingPage == null)
-                {
-                    difficultySettingPage = new DifficultySettingPage();
-                }
                 Frame.Navigate(typeof(DifficultySettingPage));
                 return;
             }
-
-            imageNumbers = GetImageNumbers(userSetRows, userSetColumns);
-            timeAvailable = GetAvailableTime(userSetRows, userSetColumns);
-
-            width += (userSetColumns - 6) * 60;
-            height += (userSetRows - 6) * 55;
-
 
             Frame.Navigate(typeof(GameWindowPage), new GameParameters
             {
                 UserSetRows = userSetRows,
                 UserSetColumns = userSetColumns,
-                ImageNumbers = imageNumbers,
-                TimeAvailable = timeAvailable,
-                Height = height,
-                Width = width
             });
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
             Application.Current.Exit();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            // Read data from a simple setting.
+            Object value = localSettings.Values["TestSetting"];
+
+            if (value == null)
+            {
+                txtOutput.Text = "no such key";
+            }
+            else
+            {
+                // Access data in value.
+                txtOutput.Text = value as string;
+            }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+            // Create a simple setting.
+            localSettings.Values["TestSetting"] = txtInput.Text;
+
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+            // Delete a simple setting.
+            if (localSettings.Values.Remove("TestSetting"))
+            {
+                ContentDialog dialog = new ContentDialog();
+
+                // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+                dialog.XamlRoot = this.XamlRoot;
+                dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+                dialog.Title = "系统提示";
+                dialog.Content = "清除成功！！";
+                dialog.PrimaryButtonText = "确定";
+                dialog.DefaultButton = ContentDialogButton.Primary;
+
+
+                var _ =  dialog.ShowAsync();
+            }
+
         }
     }
 }

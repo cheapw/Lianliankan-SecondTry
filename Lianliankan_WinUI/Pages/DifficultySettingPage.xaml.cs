@@ -85,18 +85,7 @@ namespace Lianliankan_WinUI.Pages
                 return;
             }
 
-            timeAvailable = MainMenuPage.GetAvailableTime(userSetRows, userSetColumns);
-            //double width = 450, height = 400;
-            //width += (userSetColumns - 6) * 60;
-            //height += (userSetRows - 6) * 55;
-
-            imageNumbers = MainMenuPage.GetImageNumbers(userSetRows, userSetColumns);
-
             Frame.Navigate(typeof(GameWindowPage),new GameParameters() {UserSetRows = userSetRows, UserSetColumns= userSetColumns });
-
-            //GameWindow gameWindow = new GameWindow(userSetRows, userSetColumns, imageNumbers, timeAvailable, height, width);
-            //this.Hide();
-            //gameWindow.Show();
         }
         private void ReturnToMenu_Click(object sender, RoutedEventArgs e)
         {

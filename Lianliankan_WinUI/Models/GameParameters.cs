@@ -10,9 +10,5 @@ namespace Lianliankan_WinUI.Models
     {
         public int UserSetRows { get; set; }
         public int UserSetColumns { get; set;}
-        public int ImageNumbers { get; set; }
-        public int TimeAvailable { get; set; }
-        public double Height { get; set; }
-        public double Width { get; set; }
     }
 }
