@@ -11,8 +11,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -73,30 +75,50 @@ namespace Lianliankan_WinUI.Pages
             Application.Current.Exit();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            // Read data from a simple setting.
-            Object value = localSettings.Values["TestSetting"];
+            //var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            //// Read data from a simple setting.
+            //Object value = localSettings.Values["TestSetting"];
 
-            if (value == null)
-            {
-                txtOutput.Text = "no such key";
-            }
-            else
-            {
-                // Access data in value.
-                txtOutput.Text = value as string;
-            }
+            //if (value == null)
+            //{
+            //    txtOutput.Text = "no such key";
+            //}
+            //else
+            //{
+            //    // Access data in value.
+            //    txtOutput.Text = value as string;
+            //}
+            ApplicationLanguages.PrimaryLanguageOverride = "zh-CN";
+
+            //Window m_window = new MainWindow();
+            //Frame rootFrame = new Frame();
+            //rootFrame.Navigate(typeof(MainMenuPage), null);
+            //m_window.Content = rootFrame;
+            //m_window.Activate();
+            var uri = new Uri("lianliankanwinui:");
+            await Windows.System.Launcher.LaunchUriAsync(uri, new Windows.System.LauncherOptions());
+            Application.Current.Exit();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            //var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
-            // Create a simple setting.
-            localSettings.Values["TestSetting"] = txtInput.Text;
+            //// Create a simple setting.
+            //localSettings.Values["TestSetting"] = txtInput.Text;
+            ApplicationLanguages.PrimaryLanguageOverride = "en-Us";
 
+            //Window m_window = new MainWindow();
+            //Frame rootFrame = new Frame();
+            //rootFrame.Navigate(typeof(MainMenuPage), null);
+            //m_window.Content = rootFrame;
+            //m_window.Activate();
+            var uri = new Uri("lianliankanwinui:");
+            await Windows.System.Launcher.LaunchUriAsync(uri, new Windows.System.LauncherOptions());
+            Application.Current.Exit();
+            Application.Current.Exit();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

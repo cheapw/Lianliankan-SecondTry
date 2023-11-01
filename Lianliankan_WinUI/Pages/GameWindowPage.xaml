@@ -124,10 +124,10 @@
         <StackPanel Grid.ColumnSpan="2">
             <ProgressBar x:Name="progressBar" Background="AliceBlue" BorderBrush="AliceBlue" BorderThickness="5" Value="0" Foreground="Aqua"/>
             <controls:DockPanel Height="76" Background="#FFFAFFF3">
-                <Button controls:DockPanel.Dock="Left" Content="返回主菜单" Click="ReturnToManu_Click"  Style="{StaticResource CustomButtonStyle}" Background="{StaticResource Button.GameWindowPage.Background}"/>
-                <Button Content="提示" controls:DockPanel.Dock="Left" Click="Prompt_Click"  Style="{StaticResource CustomButtonStyle}" Background="{StaticResource Button.GameWindowPage.Background}"/>
-                <Button Content="重新开始" controls:DockPanel.Dock="Right" Click="Restart_Click"  Style="{StaticResource CustomButtonStyle}" Background="{StaticResource Button.GameWindowPage.Background}"/>
-                <Button Content="重新打乱" controls:DockPanel.Dock="Right" Click="Relayout_Click"  Style="{StaticResource CustomButtonStyle}" Background="{StaticResource Button.GameWindowPage.Background}"/>
+                <Button x:Uid="Return" controls:DockPanel.Dock="Left" Content="返回主菜单" Click="ReturnToManu_Click"  Style="{StaticResource CustomButtonStyle}" Background="{StaticResource Button.GameWindowPage.Background}"/>
+                <Button x:Uid="Hint" Content="提示" controls:DockPanel.Dock="Left" Click="Prompt_Click"  Style="{StaticResource CustomButtonStyle}" Background="{StaticResource Button.GameWindowPage.Background}"/>
+                <Button x:Uid="Restart" Content="重新开始" controls:DockPanel.Dock="Right" Click="Restart_Click"  Style="{StaticResource CustomButtonStyle}" Background="{StaticResource Button.GameWindowPage.Background}"/>
+                <Button x:Uid="Reshuffle" Content="重新打乱" controls:DockPanel.Dock="Right" Click="Relayout_Click"  Style="{StaticResource CustomButtonStyle}" Background="{StaticResource Button.GameWindowPage.Background}"/>
                 <TextBlock x:Name="textbockTimeDown" Text="倒计时" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF6DDEB8" MinWidth="90"/>
             </controls:DockPanel>
 

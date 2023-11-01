@@ -2632,11 +2632,23 @@ namespace Lianliankan_WinUI.Pages
             textBlock.HorizontalAlignment = HorizontalAlignment.Center;
             textBlock.FontSize = 30d;
             Grid.SetColumnSpan(textBlock, 2);
+
+            var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+            var backToMenu = resourceLoader.GetString("BackToMenu");
+            var tryAgainPrompt = resourceLoader.GetString("TryAgainPrompt");
+
+
+
             if (isWin)
             {
-                textBlock.Text = "恭喜挑战成功，啦啦啦！";
+                var successPrompt = resourceLoader.GetString("SuccessPrompt");
+                textBlock.Text = successPrompt;
             }
-            else textBlock.Text = "时间到了哦，不要气馁，再试一次吧";
+            else 
+            {
+                var failPrompt = resourceLoader.GetString("FailPrompt");
+                textBlock.Text = failPrompt; 
+            }
 
             Button returnToMenu = new Button();
 
@@ -2645,13 +2657,13 @@ namespace Lianliankan_WinUI.Pages
                 returnToMenu.Style = obj as Style?? new Style();
             }
 
-            returnToMenu.Content = "返回主菜单";
+            returnToMenu.Content = backToMenu;
             Grid.SetRow(returnToMenu, 1);
             returnToMenu.Click += ReturnToManu_Click;
 
             Button retry = new Button();
             retry.Style = obj as Style ?? new Style();
-            retry.Content = "再玩一次";
+            retry.Content = tryAgainPrompt;
             Grid.SetRow(retry, 1);
             Grid.SetColumn(retry, 1);
             retry.Click += (sender, e) =>
@@ -2665,6 +2677,8 @@ namespace Lianliankan_WinUI.Pages
             gamePanel.Children.Add(returnToMenu);
             gamePanel.Children.Add(retry);
             IsInGameComplete = true;
+
+            timer.Stop();
         }
         #endregion
 

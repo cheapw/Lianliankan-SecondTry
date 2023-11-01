@@ -17,18 +17,18 @@
     </Page.Background>
 
     <StackPanel VerticalAlignment="Center" Margin="65,0">
-        <TextBlock Text="欢乐连连看" FontSize="60" HorizontalAlignment="Center" Margin="0,0,0,35"/>
+        <TextBlock x:Uid="GameName" Text="你的连连看" FontSize="60" HorizontalAlignment="Center" Margin="0,0,0,35"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <TextBlock Text="选择难度，开始游戏：" FontSize="28" Margin="10" HorizontalAlignment="Center"/>
-                <Button Content="简单" Tag="0" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                <Button Content="中等" Tag="1" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                <Button Content="困难" Tag="2" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                <Button Content="自定义" Tag="3" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
+                <TextBlock x:Uid="Hint_MainMenuPage" Text="选择难度，开始游戏：" FontSize="28" Margin="10" HorizontalAlignment="Center"/>
+                <Button x:Uid="EasyDifficulty" Content="简单" Tag="0" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
+                <Button x:Uid="MediumDifficulty" Content="中等" Tag="1" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
+                <Button x:Uid="HardDifficulty" Content="困难" Tag="2" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
+                <Button x:Uid="CustomDifficulty" Content="自定义" Tag="3" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
                 <TextBox x:Name="txtInput"></TextBox>
                 <TextBox x:Name="txtOutput"></TextBox>
                 <Button Content="读取" Tag="3" Click="Button_Click_1"  Style="{StaticResource CustomButtonStyle}"/>
@@ -36,7 +36,7 @@
                 <Button Content="清除" Tag="3" Click="Button_Click_3"  Style="{StaticResource CustomButtonStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <TextBlock Text="排行榜" FontSize="40" HorizontalAlignment="Center"/>
+                <TextBlock x:Uid="RankingListTile" Text="排行榜" FontSize="40" HorizontalAlignment="Center"/>
                 <controls:DataGrid  x:Name="dgRank"
                     Grid.Row="1"
                     Margin="12"

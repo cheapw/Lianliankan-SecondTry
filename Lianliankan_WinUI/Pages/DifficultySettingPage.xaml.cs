@@ -59,25 +59,37 @@ namespace Lianliankan_WinUI.Pages
         {
             this.ShowPad.Visibility = Visibility.Collapsed;
             this.OperationPad.Visibility = Visibility.Visible;
-            this.TbkGameDifficulty.Text = $"你的选择是：{(int)verticalSlider.Value}行 X {(int)horizontalSlider.Value}列 !";
+
+            var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+            var gameCustomHint = resourceLoader.GetString("GameCustomHintText");
+            var row = resourceLoader.GetString("Row");
+            var column = resourceLoader.GetString("Column");
+            var rowColumnLinkText = resourceLoader.GetString("RowColumnLinkText");
+
+            this.TbkGameDifficulty.Text = $"{gameCustomHint} {(int)verticalSlider.Value} {row} {rowColumnLinkText} {(int)horizontalSlider.Value} {column}!";
         }
 
         private async void StartGame_Click(object sender, RoutedEventArgs e)
         {
-            int userSetRows, userSetColumns, imageNumbers, timeAvailable;
+            int userSetRows, userSetColumns;
             userSetRows = (int)verticalSlider.Value;
             userSetColumns = (int)horizontalSlider.Value;
 
             if (userSetRows * userSetColumns % 2 == 1)
             {
+                var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+                var systemPrompts = resourceLoader.GetString("SystemPrompts");
+                var confirm = resourceLoader.GetString("Confirm");
+                var customSettingAlert = resourceLoader.GetString("CustomSettingAlert");
+
                 ContentDialog dialog = new ContentDialog();
 
                 // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
                 dialog.XamlRoot = this.XamlRoot;
                 dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                dialog.Title = "系统提示";
-                dialog.Content = "所选的行和列的乘积不能为奇数，那样的话最后就会剩下一个按钮找不到伴哦！";
-                dialog.PrimaryButtonText = "确定";
+                dialog.Title = systemPrompts;
+                dialog.Content = customSettingAlert;
+                dialog.PrimaryButtonText = confirm;
                 dialog.DefaultButton = ContentDialogButton.Primary;
 
 

@@ -27,7 +27,8 @@
   </Dependencies>
 
   <Resources>
-    <Resource Language="x-generate"/>
+	  <Resource Language="en-US"/>
+	  <Resource Language="zh-CN"/>
   </Resources>
 
   <Applications>
@@ -43,11 +44,24 @@
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+		<Extensions>
+			<!--<uap3:Extension Category="windows.appUriHandler">
+				<uap3:AppUriHandler>
+					<uap3:Host Name="winuigallery.com" />
+					<uap3:Host Name="xamlcontrolsgallery.com" />
+				</uap3:AppUriHandler>
+			</uap3:Extension>-->
+			<uap:Extension Category="windows.protocol">
+				<uap:Protocol Name="lianliankanwinui">
+					<uap:DisplayName>Lianliankan_WinUI</uap:DisplayName>
+				</uap:Protocol>
+			</uap:Extension>
+		</Extensions>
     </Application>
   </Applications>
 
   <Capabilities>
 	  <rescap:Capability Name="runFullTrust" />
     <Capability Name="internetClient"/></Capabilities>
-  
+
 </Package>
