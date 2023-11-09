@@ -8,15 +8,16 @@ namespace Lianliankan_WinUI.Models
 {
     class RankInfo
     {
-        public string UserName { get; set; }
+        public string Player { get; set; }
 
         public int Rank { get; set; }
-        public int Mark { get; set; }
-        public string Difficulty { get; set; }
+        public int Score { get; set; }
+        public string LevelDescription { get; set; }
+        public int AvailableTime { get; set; }
         public int ActualTime { get; set; }
-        public int RemaindTime { get; set; }
         public int UserSetRow { get; set; }
         public int UserSetColumn { get; set; }
-        public DateTime CompleteTime { get; set; }
+        public GameLevels GameLevel { get; set; }
+        public DateTime PlayTime { get; set; }
     }
 }

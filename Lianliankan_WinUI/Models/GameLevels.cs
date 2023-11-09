@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Lianliankan_WinUI.Models
 {
-    class GameParameters
+    public enum GameLevels
     {
-        public int UserSetRows { get; set; }
-        public int UserSetColumns { get; set;}
+        Easy = 1,
+        Medium = 2,
+        Hard = 3,
+        Custom = 4,
     }
 }

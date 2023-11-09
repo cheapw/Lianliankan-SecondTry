@@ -2720,10 +2720,10 @@ namespace Lianliankan_WinUI.Pages
             this.InitializeComponent();
         }
 
-        private GameParameters m_GameParameter;
+        private GameOptions m_GameParameter;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            m_GameParameter = e.Parameter as GameParameters;
+            m_GameParameter = e.Parameter as GameOptions;
             this.UserSetRows = m_GameParameter.UserSetRows;
             this.UserSetColumns = m_GameParameter.UserSetColumns;
 

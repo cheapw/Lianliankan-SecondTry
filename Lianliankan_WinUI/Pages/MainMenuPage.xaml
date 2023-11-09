@@ -7,8 +7,65 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
-    mc:Ignorable="d"
-    >
+    xmlns:primitives="using:CommunityToolkit.WinUI.UI.Controls.Primitives"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="InvalidBrush" Color="#FFFF00"/>
+                    <SolidColorBrush x:Key="FillerGridLinesBrush" Color="Transparent"/>
+                    <StaticResource x:Key="ScrollBarsSeparatorBackground" ResourceKey="SystemControlPageBackgroundChromeLowBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderForegroundBrush" ResourceKey="SystemControlForegroundBaseMediumBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderBackgroundColor" ResourceKey="SystemAltHighColor"/>
+                    <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundBrush" Color="{StaticResource DataGridColumnHeaderBackgroundColor}"/>
+                    <StaticResource x:Key="DataGridColumnHeaderHoveredBackgroundColor" ResourceKey="SystemListLowColor"/>
+                    <StaticResource x:Key="DataGridColumnHeaderPressedBackgroundColor" ResourceKey="SystemListMediumColor"/>
+                    <StaticResource x:Key="DataGridColumnHeaderDraggedBackgroundBrush" ResourceKey="SystemControlBackgroundChromeMediumLowBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderPointerOverBrush" ResourceKey="SystemControlHighlightListLowBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderPressedBrush" ResourceKey="SystemControlHighlightListMediumBrush"/>
+                    <StaticResource x:Key="DataGridRowGroupHeaderBackgroundBrush" ResourceKey="SystemControlBackgroundChromeMediumBrush"/>
+                    <StaticResource x:Key="DataGridRowGroupHeaderPressedBackgroundBrush" ResourceKey="SystemControlBackgroundListMediumBrush"/>
+                    <StaticResource x:Key="DataGridRowGroupHeaderForegroundBrush" ResourceKey="SystemControlForegroundBaseHighBrush"/>
+                    <StaticResource x:Key="DataGridRowHoveredBackgroundColor" ResourceKey="SystemListLowColor"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <SolidColorBrush x:Key="InvalidBrush" Color="#FFFF00"/>
+                    <SolidColorBrush x:Key="FillerGridLinesBrush" Color="Transparent"/>
+                    <StaticResource x:Key="ScrollBarsSeparatorBackground" ResourceKey="SystemControlPageBackgroundChromeLowBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderForegroundBrush" ResourceKey="SystemControlForegroundBaseMediumBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderBackgroundColor" ResourceKey="SystemAltHighColor"/>
+                    <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundBrush" Color="{StaticResource DataGridColumnHeaderBackgroundColor}"/>
+                    <StaticResource x:Key="DataGridColumnHeaderHoveredBackgroundColor" ResourceKey="SystemListLowColor"/>
+                    <StaticResource x:Key="DataGridColumnHeaderPressedBackgroundColor" ResourceKey="SystemListMediumColor"/>
+                    <StaticResource x:Key="DataGridColumnHeaderDraggedBackgroundBrush" ResourceKey="SystemControlBackgroundChromeMediumLowBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderPointerOverBrush" ResourceKey="SystemControlHighlightListLowBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderPressedBrush" ResourceKey="SystemControlHighlightListMediumBrush"/>
+                    <StaticResource x:Key="DataGridRowGroupHeaderBackgroundBrush" ResourceKey="SystemControlBackgroundChromeMediumBrush"/>
+                    <StaticResource x:Key="DataGridRowGroupHeaderPressedBackgroundBrush" ResourceKey="SystemControlBackgroundListMediumBrush"/>
+                    <StaticResource x:Key="DataGridRowGroupHeaderForegroundBrush" ResourceKey="SystemControlForegroundBaseHighBrush"/>
+                    <StaticResource x:Key="DataGridRowHoveredBackgroundColor" ResourceKey="SystemListLowColor"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="InvalidBrush" Color="#C50500"/>
+                    <SolidColorBrush x:Key="FillerGridLinesBrush" Color="Transparent"/>
+                    <SolidColorBrush x:Key="ScrollBarsSeparatorBackground" Color="{StaticResource SystemChromeMediumColor}" Opacity="0.9"/>
+                    <StaticResource x:Key="DataGridColumnHeaderForegroundBrush" ResourceKey="SystemControlForegroundBaseMediumBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderBackgroundColor" ResourceKey="SystemAltHighColor"/>
+                    <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundBrush" Color="{StaticResource DataGridColumnHeaderBackgroundColor}"/>
+                    <StaticResource x:Key="DataGridColumnHeaderHoveredBackgroundColor" ResourceKey="SystemListLowColor"/>
+                    <StaticResource x:Key="DataGridColumnHeaderPressedBackgroundColor" ResourceKey="SystemListMediumColor"/>
+                    <StaticResource x:Key="DataGridColumnHeaderDraggedBackgroundBrush" ResourceKey="SystemControlBackgroundChromeMediumLowBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderPointerOverBrush" ResourceKey="SystemControlHighlightListLowBrush"/>
+                    <StaticResource x:Key="DataGridColumnHeaderPressedBrush" ResourceKey="SystemControlHighlightListMediumBrush"/>
+                    <StaticResource x:Key="DataGridRowGroupHeaderBackgroundBrush" ResourceKey="SystemControlBackgroundChromeMediumBrush"/>
+                    <StaticResource x:Key="DataGridRowGroupHeaderPressedBackgroundBrush" ResourceKey="SystemControlBackgroundListMediumBrush"/>
+                    <StaticResource x:Key="DataGridRowGroupHeaderForegroundBrush" ResourceKey="SystemControlForegroundBaseHighBrush"/>
+                    <StaticResource x:Key="DataGridRowHoveredBackgroundColor" ResourceKey="SystemListLowColor"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Page.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="White" Offset="0"/>
@@ -21,7 +78,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3.4*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TextBlock x:Uid="Hint_MainMenuPage" Text="选择难度，开始游戏：" FontSize="28" Margin="10" HorizontalAlignment="Center"/>
@@ -29,18 +86,18 @@
                 <Button x:Uid="MediumDifficulty" Content="中等" Tag="1" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
                 <Button x:Uid="HardDifficulty" Content="困难" Tag="2" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
                 <Button x:Uid="CustomDifficulty" Content="自定义" Tag="3" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                <TextBox x:Name="txtInput"></TextBox>
+                <!--<TextBox x:Name="txtInput"></TextBox>
                 <TextBox x:Name="txtOutput"></TextBox>
                 <Button Content="读取" Tag="3" Click="Button_Click_1"  Style="{StaticResource CustomButtonStyle}"/>
                 <Button Content="写入" Tag="3" Click="Button_Click_2"  Style="{StaticResource CustomButtonStyle}"/>
-                <Button Content="清除" Tag="3" Click="Button_Click_3"  Style="{StaticResource CustomButtonStyle}"/>
+                <Button Content="清除" Tag="3" Click="Button_Click_3"  Style="{StaticResource CustomButtonStyle}"/>-->
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <TextBlock x:Uid="RankingListTile" Text="排行榜" FontSize="40" HorizontalAlignment="Center"/>
-                <controls:DataGrid  x:Name="dgRank"
+                <controls:DataGrid  x:Name="dgRank" 
                     Grid.Row="1"
                     Margin="12"
-                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Center"
                     HorizontalScrollBarVisibility="Visible"
                     VerticalScrollBarVisibility="Visible"
                     AlternatingRowBackground="Transparent"
@@ -50,19 +107,129 @@
                     CanUserSortColumns="False"
                     CanUserReorderColumns="True"
                     CanUserResizeColumns="True"
-                    ColumnHeaderHeight="32"
+                    ColumnHeaderHeight="45"
                     MaxColumnWidth="400"
                     FrozenColumnCount="0"
                     GridLinesVisibility="All"
                     HeadersVisibility="Column"
-                    IsReadOnly="False"
+                    IsReadOnly="True"
                     RowDetailsVisibilityMode="Collapsed"
                     SelectionMode="Extended"
                     RowGroupHeaderPropertyNameAlternative="Range">
+                    <!--<controls:DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="primitives:DataGridColumnHeader">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="primitives:DataGridColumnHeader">
+                                        <ContentPresenter Background="Red" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </controls:DataGrid.ColumnHeaderStyle>-->
+                    <controls:DataGrid.CellStyle>
+                        <Style TargetType="controls:DataGridCell">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </controls:DataGrid.CellStyle>
+                    <controls:DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="primitives:DataGridColumnHeader">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="IsTabStop" Value="False"/>
+                            <Setter Property="SeparatorBrush" Value="LightGray" />
+                            <Setter Property="Padding" Value="16,0,16,0"/>
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="MinHeight" Value="32"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="primitives:DataGridColumnHeader">
+                                        <Grid x:Name="ColumnHeaderRoot">
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal">
+                                                        <Storyboard>
+                                                            <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Duration="0" To="{ThemeResource DataGridColumnHeaderBackgroundColor}"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="PointerOver">
+                                                        <Storyboard>
+                                                            <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Duration="0" To="{ThemeResource DataGridColumnHeaderHoveredBackgroundColor}"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Pressed">
+                                                        <Storyboard>
+                                                            <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Duration="0" To="{ThemeResource DataGridColumnHeaderPressedBackgroundColor}"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                                <VisualStateGroup x:Name="FocusStates">
+                                                    <VisualState x:Name="Unfocused"/>
+                                                    <VisualState x:Name="Focused">
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                                <!--<VisualStateGroup x:Name="SortStates">
+                                                    <VisualState x:Name="Unsorted"/>
+                                                    <VisualState x:Name="SortAscending">
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="SortIcon" Storyboard.TargetProperty="Opacity" Duration="0" To="1"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="SortDescending">
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="SortIcon" Storyboard.TargetProperty="Opacity" Duration="0" To="1"/>
+                                                        </Storyboard>
+                                                        <VisualState.Setters>
+                                                            <Setter Target="SortIcon.Glyph" Value="{ThemeResource SortIconDescending}"/>
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>-->
+                                            </VisualStateManager.VisualStateGroups>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Rectangle x:Name="BackgroundRectangle" Stretch="Fill" Fill="{ThemeResource DataGridColumnHeaderBackgroundBrush}" Grid.ColumnSpan="2"/>
+
+                                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <!--<ColumnDefinition MinWidth="32" Width="Auto"/>-->
+                                                </Grid.ColumnDefinitions>
+
+                                                <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
+
+                                                <!--<FontIcon Grid.Column="1" x:Name="SortIcon" FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="{ThemeResource SortIconAscending}" FontSize="12"
+                            Foreground="{ThemeResource DataGridColumnHeaderForegroundBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0"/>-->
+                                            </Grid>
+                                            <Rectangle x:Name="VerticalSeparator" Grid.Column="1" Width="1" VerticalAlignment="Stretch" Fill="{TemplateBinding SeparatorBrush}" Visibility="{TemplateBinding SeparatorVisibility}"/>
+
+                                            <!--<Grid x:Name="FocusVisual" IsHitTestVisible="False" Opacity="0">
+                                                <Rectangle x:Name="FocusVisualPrimary" Stroke="{ThemeResource DataGridCellFocusVisualPrimaryBrush}" StrokeThickness="2" Fill="Transparent"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False"/>
+                                                <Rectangle x:Name="FocusVisualSecondary" Stroke="{ThemeResource DataGridCellFocusVisualSecondaryBrush}" StrokeThickness="1" Fill="Transparent"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False" Margin="2"/>
+                                            </Grid>-->
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </controls:DataGrid.ColumnHeaderStyle>
                     <controls:DataGrid.Columns>
-                        <controls:DataGridTextColumn Header="排名" Binding="{Binding Rank}" Tag="Rank" />
-                        <controls:DataGridTextColumn Header="分数" Binding="{Binding Mark}" Tag="Mark" />
-                        <controls:DataGridTextColumn Header="完成时间" Binding="{Binding CompleteTime}" Tag="CompleteTime" />
+                        <controls:DataGridTextColumn Header="排名" Binding="{Binding Rank}" FontSize="18" />
+                        <controls:DataGridTextColumn Header="玩家" Binding="{Binding Player}" FontSize="18" />
+                        <controls:DataGridTextColumn Header="分数" Binding="{Binding Score}" FontSize="18" />
+                        <controls:DataGridTextColumn Header="难度" Binding="{Binding LevelDescription}" FontSize="18" />
+                        <controls:DataGridTextColumn Header="可用时间" Binding="{Binding AvailableTime}" FontSize="18" />
+                        <controls:DataGridTextColumn Header="实际用时" Binding="{Binding ActualTime}" FontSize="18" />
+                        <controls:DataGridTextColumn Header="游戏时间" Binding="{Binding PlayTime}" FontSize="18" />
                     </controls:DataGrid.Columns>
                 </controls:DataGrid>
             </StackPanel>

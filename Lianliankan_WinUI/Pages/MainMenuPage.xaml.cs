@@ -31,9 +31,9 @@ namespace Lianliankan_WinUI.Pages
             this.InitializeComponent();
             List<RankInfo> rankInfos = new List<RankInfo>
             {
-                new RankInfo{Rank = 1,Mark = 3000,CompleteTime=DateTime.Now},
-                new RankInfo{Rank=2,Mark=2800,CompleteTime=DateTime.Now.AddDays(10) },
-                new RankInfo{Rank=3,Mark=500,CompleteTime=DateTime.MaxValue }
+                new RankInfo{Rank = 1,Score = 3000,PlayTime=DateTime.Now,Player="Peter",ActualTime=60,LevelDescription="¼òµ¥(8X6)"},
+                new RankInfo{Rank=2,Score=2800,PlayTime=DateTime.Now.AddDays(10),Player="Peter",ActualTime=90,LevelDescription="¼òµ¥(8X6)" },
+                new RankInfo{Rank=3,Score=500,PlayTime=DateTime.MaxValue,Player="Peter",ActualTime=120,LevelDescription="¼òµ¥(8X6)" }
             };
             this.dgRank.ItemsSource = rankInfos;
         }
@@ -63,7 +63,7 @@ namespace Lianliankan_WinUI.Pages
                 return;
             }
 
-            Frame.Navigate(typeof(GameWindowPage), new GameParameters
+            Frame.Navigate(typeof(GameWindowPage), new GameOptions
             {
                 UserSetRows = userSetRows,
                 UserSetColumns = userSetColumns,
@@ -117,7 +117,6 @@ namespace Lianliankan_WinUI.Pages
             //m_window.Activate();
             var uri = new Uri("lianliankanwinui:");
             await Windows.System.Launcher.LaunchUriAsync(uri, new Windows.System.LauncherOptions());
-            Application.Current.Exit();
             Application.Current.Exit();
         }
 

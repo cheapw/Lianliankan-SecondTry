@@ -97,7 +97,7 @@ namespace Lianliankan_WinUI.Pages
                 return;
             }
 
-            Frame.Navigate(typeof(GameWindowPage),new GameParameters() {UserSetRows = userSetRows, UserSetColumns= userSetColumns });
+            Frame.Navigate(typeof(GameWindowPage),new GameOptions() {UserSetRows = userSetRows, UserSetColumns= userSetColumns });
         }
         private void ReturnToMenu_Click(object sender, RoutedEventArgs e)
         {
