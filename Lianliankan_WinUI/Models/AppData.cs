@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lianliankan_WinUI.Models
 {
-    class GameOptions
+    class AppData
     {
-        public int UserSetRows { get; set; }
-        public int UserSetColumns { get; set;}
-        public GameLevels GameLevels { get; set; }
+        public static List<RankInfo> RankInfoes { get; set; } = new List<RankInfo>();
     }
 }

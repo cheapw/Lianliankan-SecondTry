@@ -130,7 +130,9 @@
                 <Button x:Uid="Reshuffle" Content="重新打乱" controls:DockPanel.Dock="Right" Click="Relayout_Click"  Style="{StaticResource CustomButtonStyle}" Background="{StaticResource Button.GameWindowPage.Background}"/>
                 <TextBlock x:Name="textbockTimeDown" Text="倒计时" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF6DDEB8" MinWidth="90"/>
             </controls:DockPanel>
-
+            <Grid Visibility="Collapsed">
+                <Button Content="Hello" x:Name="btnTest"/>
+            </Grid>
         </StackPanel>
         <controls:GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="4" Background="Black" Grid.ColumnSpan="2"></controls:GridSplitter>
         <Grid x:Name="gamePanel" Margin="10" Grid.Row="2" Grid.Column="1" >

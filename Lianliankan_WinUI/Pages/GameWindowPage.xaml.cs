@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.Json;
 using Windows.Devices.Input;
 using Windows.Foundation;
 
@@ -30,6 +31,7 @@ namespace Lianliankan_WinUI.Pages
         public int UserSetColumns { get; set; }
         public int ImageNumbers { get; set; }
         public int TimeAvailable { get; set; }
+        public int RemainingSeconds { get; set; }
         #endregion
 
         #region 私有字段
@@ -52,6 +54,8 @@ namespace Lianliankan_WinUI.Pages
         // 可用通道，比整个按钮组成的方阵大一圈，该二维数组内部的元素是布尔类型，据此判断两个按钮是否可以消除，
         // 外圈全部为true，有按钮占据的地方全部为false，按钮被消除后相应位置变为true
         private bool[,] availableChannels = null;
+
+        private GameOptions m_GameParameter;
         #endregion
 
         #region 根据用户传来的一些数据进行初始设定，例如Grid 网格的行和列，按钮的个数等
@@ -2578,6 +2582,8 @@ namespace Lianliankan_WinUI.Pages
                     timer.Stop();
                 }
 
+                RemainingSeconds = seconds;
+
                 // 实时增加progressbar进度
                 double progress = 100 - (double)seconds / (timeAvailable * 60) * 100;
                 if (progress >= 0 && progress <= 100)
@@ -2643,6 +2649,7 @@ namespace Lianliankan_WinUI.Pages
             {
                 var successPrompt = resourceLoader.GetString("SuccessPrompt");
                 textBlock.Text = successPrompt;
+                SaveRankInfo();
             }
             else 
             {
@@ -2679,6 +2686,47 @@ namespace Lianliankan_WinUI.Pages
             IsInGameComplete = true;
 
             timer.Stop();
+        }
+
+        private void SaveRankInfo()
+        {
+            var rows = m_GameParameter.UserSetRows;
+            var columns = m_GameParameter.UserSetColumns;
+            var gameLevels = m_GameParameter.GameLevels;
+            var totalTime = TimeAvailable*60;
+            var actualTime = TimeAvailable*60 - RemainingSeconds;
+            
+
+            var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+            var levelDesc = resourceLoader.GetString($"{Enum.GetName(typeof(GameLevels), gameLevels)}/Content");
+
+            var rankInfo = new RankInfo
+            {
+                UserSetColumn =columns,
+                UserSetRow =rows,
+                ActualTime = actualTime,
+                AvailableTime = totalTime,
+                PlayTime = DateTime.Now,
+                GameLevel = gameLevels,
+                LevelDescription = $"{levelDesc}({rows}X{columns})",
+                Score = (int)Math.Ceiling((rows * columns * 10) * ((double)RemainingSeconds / totalTime))+ (rows * columns),
+                
+            };
+
+            var currentRank = AppData.RankInfoes.Count(x => x.Score > rankInfo.Score) + 1;
+
+            AppData.RankInfoes.Add(rankInfo);
+
+            AppData.RankInfoes = AppData.RankInfoes.OrderByDescending(x => x.Score).ToList();
+
+            for (int i = 1; i <= AppData.RankInfoes.Count; i++)
+            {
+                AppData.RankInfoes[i-1].Rank = i;
+            }
+
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+            localSettings.Values["RankInfoes"] = JsonSerializer.Serialize(AppData.RankInfoes.Take(10).ToList());
         }
         #endregion
 
@@ -2720,7 +2768,6 @@ namespace Lianliankan_WinUI.Pages
             this.InitializeComponent();
         }
 
-        private GameOptions m_GameParameter;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             m_GameParameter = e.Parameter as GameOptions;

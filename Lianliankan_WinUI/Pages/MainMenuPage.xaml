@@ -73,166 +73,172 @@
         </LinearGradientBrush>
     </Page.Background>
 
-    <StackPanel VerticalAlignment="Center" Margin="65,0">
-        <TextBlock x:Uid="GameName" Text="你的连连看" FontSize="60" HorizontalAlignment="Center" Margin="0,0,0,35"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3.4*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                <TextBlock x:Uid="Hint_MainMenuPage" Text="选择难度，开始游戏：" FontSize="28" Margin="10" HorizontalAlignment="Center"/>
-                <Button x:Uid="EasyDifficulty" Content="简单" Tag="0" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                <Button x:Uid="MediumDifficulty" Content="中等" Tag="1" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                <Button x:Uid="HardDifficulty" Content="困难" Tag="2" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                <Button x:Uid="CustomDifficulty" Content="自定义" Tag="3" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                <!--<TextBox x:Name="txtInput"></TextBox>
-                <TextBox x:Name="txtOutput"></TextBox>
-                <Button Content="读取" Tag="3" Click="Button_Click_1"  Style="{StaticResource CustomButtonStyle}"/>
-                <Button Content="写入" Tag="3" Click="Button_Click_2"  Style="{StaticResource CustomButtonStyle}"/>
-                <Button Content="清除" Tag="3" Click="Button_Click_3"  Style="{StaticResource CustomButtonStyle}"/>-->
-            </StackPanel>
-            <StackPanel Grid.Column="1">
-                <TextBlock x:Uid="RankingListTile" Text="排行榜" FontSize="40" HorizontalAlignment="Center"/>
-                <controls:DataGrid  x:Name="dgRank" 
-                    Grid.Row="1"
-                    Margin="12"
-                    VerticalAlignment="Stretch" HorizontalAlignment="Center"
-                    HorizontalScrollBarVisibility="Visible"
-                    VerticalScrollBarVisibility="Visible"
-                    AlternatingRowBackground="Transparent"
-                    AreRowDetailsFrozen="False"
-                    AreRowGroupHeadersFrozen="True"
-                    AutoGenerateColumns="False"
-                    CanUserSortColumns="False"
-                    CanUserReorderColumns="True"
-                    CanUserResizeColumns="True"
-                    ColumnHeaderHeight="45"
-                    MaxColumnWidth="400"
-                    FrozenColumnCount="0"
-                    GridLinesVisibility="All"
-                    HeadersVisibility="Column"
-                    IsReadOnly="True"
-                    RowDetailsVisibilityMode="Collapsed"
-                    SelectionMode="Extended"
-                    RowGroupHeaderPropertyNameAlternative="Range">
-                    <!--<controls:DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="primitives:DataGridColumnHeader">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="primitives:DataGridColumnHeader">
-                                        <ContentPresenter Background="Red" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </controls:DataGrid.ColumnHeaderStyle>-->
-                    <controls:DataGrid.CellStyle>
-                        <Style TargetType="controls:DataGridCell">
-                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        </Style>
-                    </controls:DataGrid.CellStyle>
-                    <controls:DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="primitives:DataGridColumnHeader">
-                            <Setter Property="Foreground" Value="Black"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="VerticalContentAlignment" Value="Center"/>
-                            <Setter Property="IsTabStop" Value="False"/>
-                            <Setter Property="SeparatorBrush" Value="LightGray" />
-                            <Setter Property="Padding" Value="16,0,16,0"/>
-                            <Setter Property="FontSize" Value="18"/>
-                            <Setter Property="MinHeight" Value="32"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="primitives:DataGridColumnHeader">
-                                        <Grid x:Name="ColumnHeaderRoot">
-                                            <VisualStateManager.VisualStateGroups>
-                                                <VisualStateGroup x:Name="CommonStates">
-                                                    <VisualState x:Name="Normal">
-                                                        <Storyboard>
-                                                            <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Duration="0" To="{ThemeResource DataGridColumnHeaderBackgroundColor}"/>
-                                                        </Storyboard>
-                                                    </VisualState>
-                                                    <VisualState x:Name="PointerOver">
-                                                        <Storyboard>
-                                                            <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Duration="0" To="{ThemeResource DataGridColumnHeaderHoveredBackgroundColor}"/>
-                                                        </Storyboard>
-                                                    </VisualState>
-                                                    <VisualState x:Name="Pressed">
-                                                        <Storyboard>
-                                                            <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Duration="0" To="{ThemeResource DataGridColumnHeaderPressedBackgroundColor}"/>
-                                                        </Storyboard>
-                                                    </VisualState>
-                                                </VisualStateGroup>
-                                                <VisualStateGroup x:Name="FocusStates">
-                                                    <VisualState x:Name="Unfocused"/>
-                                                    <VisualState x:Name="Focused">
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
-                                                        </Storyboard>
-                                                    </VisualState>
-                                                </VisualStateGroup>
-                                                <!--<VisualStateGroup x:Name="SortStates">
-                                                    <VisualState x:Name="Unsorted"/>
-                                                    <VisualState x:Name="SortAscending">
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetName="SortIcon" Storyboard.TargetProperty="Opacity" Duration="0" To="1"/>
-                                                        </Storyboard>
-                                                    </VisualState>
-                                                    <VisualState x:Name="SortDescending">
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetName="SortIcon" Storyboard.TargetProperty="Opacity" Duration="0" To="1"/>
-                                                        </Storyboard>
-                                                        <VisualState.Setters>
-                                                            <Setter Target="SortIcon.Glyph" Value="{ThemeResource SortIconDescending}"/>
-                                                        </VisualState.Setters>
-                                                    </VisualState>
-                                                </VisualStateGroup>-->
-                                            </VisualStateManager.VisualStateGroups>
+    <Grid>
+        <StackPanel Margin="3,3" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+            <Button Content="CN" Margin="3" x:Name="BtnCN" Click="BtnCN_Click"/>
+            <Button Content="EN" Margin="3" x:Name="BtnEN" Click="BtnEN_Click"/>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Center" Margin="65,0">
+            <TextBlock x:Uid="GameName" Text="你的连连看" FontSize="60" HorizontalAlignment="Center" Margin="0,0,0,35"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3.4*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock x:Uid="Hint_MainMenuPage" Text="选择难度，开始游戏：" FontSize="28" Margin="10" HorizontalAlignment="Center"/>
+                    <Button x:Uid="Easy" Content="简单" Tag="0" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
+                    <Button x:Uid="Medium" Content="中等" Tag="1" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
+                    <Button x:Uid="Hard" Content="困难" Tag="2" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
+                    <Button x:Uid="Custom" Content="自定义" Tag="3" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
+                    <!--<TextBox x:Name="txtInput"></TextBox>
+            <TextBox x:Name="txtOutput"></TextBox>
+            <Button Content="读取" Tag="3" Click="Button_Click_1"  Style="{StaticResource CustomButtonStyle}"/>-->
+                    <!--<Button Content="写入" Tag="3" Click="Button_Click_2"  Style="{StaticResource CustomButtonStyle}"/>
+                    <Button Content="清除" Tag="3" Click="Button_Click_3"  Style="{StaticResource CustomButtonStyle}"/>-->
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock x:Uid="RankingListTile" Text="排行榜" FontSize="40" HorizontalAlignment="Center"/>
+                    <controls:DataGrid  x:Name="dgRank" 
+                Grid.Row="1"
+                Margin="12"
+                VerticalAlignment="Stretch" HorizontalAlignment="Center"
+                HorizontalScrollBarVisibility="Visible"
+                VerticalScrollBarVisibility="Visible"
+                AlternatingRowBackground="Transparent"
+                AreRowDetailsFrozen="False"
+                AreRowGroupHeadersFrozen="True"
+                AutoGenerateColumns="False"
+                CanUserSortColumns="False"
+                CanUserReorderColumns="True"
+                CanUserResizeColumns="True"
+                ColumnHeaderHeight="45"
+                MaxColumnWidth="400"
+                FrozenColumnCount="0"
+                GridLinesVisibility="All"
+                HeadersVisibility="Column"
+                IsReadOnly="True"
+                RowDetailsVisibilityMode="Collapsed"
+                SelectionMode="Extended"
+                RowGroupHeaderPropertyNameAlternative="Range">
+                        <!--<controls:DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="primitives:DataGridColumnHeader">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="primitives:DataGridColumnHeader">
+                                    <ContentPresenter Background="Red" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </controls:DataGrid.ColumnHeaderStyle>-->
+                        <controls:DataGrid.CellStyle>
+                            <Style TargetType="controls:DataGridCell">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </controls:DataGrid.CellStyle>
+                        <controls:DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="primitives:DataGridColumnHeader">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="IsTabStop" Value="False"/>
+                                <Setter Property="SeparatorBrush" Value="LightGray" />
+                                <Setter Property="Padding" Value="12,0,12,0"/>
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="MinHeight" Value="32"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="primitives:DataGridColumnHeader">
+                                            <Grid x:Name="ColumnHeaderRoot">
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualState x:Name="Normal">
+                                                            <Storyboard>
+                                                                <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Duration="0" To="{ThemeResource DataGridColumnHeaderBackgroundColor}"/>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                        <VisualState x:Name="PointerOver">
+                                                            <Storyboard>
+                                                                <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Duration="0" To="{ThemeResource DataGridColumnHeaderHoveredBackgroundColor}"/>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                        <VisualState x:Name="Pressed">
+                                                            <Storyboard>
+                                                                <ColorAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Duration="0" To="{ThemeResource DataGridColumnHeaderPressedBackgroundColor}"/>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                    <VisualStateGroup x:Name="FocusStates">
+                                                        <VisualState x:Name="Unfocused"/>
+                                                        <VisualState x:Name="Focused">
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                    <!--<VisualStateGroup x:Name="SortStates">
+                                                <VisualState x:Name="Unsorted"/>
+                                                <VisualState x:Name="SortAscending">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="SortIcon" Storyboard.TargetProperty="Opacity" Duration="0" To="1"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="SortDescending">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="SortIcon" Storyboard.TargetProperty="Opacity" Duration="0" To="1"/>
+                                                    </Storyboard>
+                                                    <VisualState.Setters>
+                                                        <Setter Target="SortIcon.Glyph" Value="{ThemeResource SortIconDescending}"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>-->
+                                                </VisualStateManager.VisualStateGroups>
 
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Rectangle x:Name="BackgroundRectangle" Stretch="Fill" Fill="{ThemeResource DataGridColumnHeaderBackgroundBrush}" Grid.ColumnSpan="2"/>
-
-                                            <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
-                                                    <!--<ColumnDefinition MinWidth="32" Width="Auto"/>-->
+                                                    <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
+                                                <Rectangle x:Name="BackgroundRectangle" Stretch="Fill" Fill="{ThemeResource DataGridColumnHeaderBackgroundBrush}" Grid.ColumnSpan="2"/>
 
-                                                <!--<FontIcon Grid.Column="1" x:Name="SortIcon" FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="{ThemeResource SortIconAscending}" FontSize="12"
-                            Foreground="{ThemeResource DataGridColumnHeaderForegroundBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0"/>-->
+                                                <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <!--<ColumnDefinition MinWidth="32" Width="Auto"/>-->
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
+
+                                                    <!--<FontIcon Grid.Column="1" x:Name="SortIcon" FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="{ThemeResource SortIconAscending}" FontSize="12"
+                        Foreground="{ThemeResource DataGridColumnHeaderForegroundBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0"/>-->
+                                                </Grid>
+                                                <Rectangle x:Name="VerticalSeparator" Grid.Column="1" Width="1" VerticalAlignment="Stretch" Fill="{TemplateBinding SeparatorBrush}" Visibility="{TemplateBinding SeparatorVisibility}"/>
+
+                                                <!--<Grid x:Name="FocusVisual" IsHitTestVisible="False" Opacity="0">
+                                            <Rectangle x:Name="FocusVisualPrimary" Stroke="{ThemeResource DataGridCellFocusVisualPrimaryBrush}" StrokeThickness="2" Fill="Transparent"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False"/>
+                                            <Rectangle x:Name="FocusVisualSecondary" Stroke="{ThemeResource DataGridCellFocusVisualSecondaryBrush}" StrokeThickness="1" Fill="Transparent"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False" Margin="2"/>
+                                        </Grid>-->
                                             </Grid>
-                                            <Rectangle x:Name="VerticalSeparator" Grid.Column="1" Width="1" VerticalAlignment="Stretch" Fill="{TemplateBinding SeparatorBrush}" Visibility="{TemplateBinding SeparatorVisibility}"/>
-
-                                            <!--<Grid x:Name="FocusVisual" IsHitTestVisible="False" Opacity="0">
-                                                <Rectangle x:Name="FocusVisualPrimary" Stroke="{ThemeResource DataGridCellFocusVisualPrimaryBrush}" StrokeThickness="2" Fill="Transparent"
-                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False"/>
-                                                <Rectangle x:Name="FocusVisualSecondary" Stroke="{ThemeResource DataGridCellFocusVisualSecondaryBrush}" StrokeThickness="1" Fill="Transparent"
-                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False" Margin="2"/>
-                                            </Grid>-->
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </controls:DataGrid.ColumnHeaderStyle>
-                    <controls:DataGrid.Columns>
-                        <controls:DataGridTextColumn Header="排名" Binding="{Binding Rank}" FontSize="18" />
-                        <controls:DataGridTextColumn Header="玩家" Binding="{Binding Player}" FontSize="18" />
-                        <controls:DataGridTextColumn Header="分数" Binding="{Binding Score}" FontSize="18" />
-                        <controls:DataGridTextColumn Header="难度" Binding="{Binding LevelDescription}" FontSize="18" />
-                        <controls:DataGridTextColumn Header="可用时间" Binding="{Binding AvailableTime}" FontSize="18" />
-                        <controls:DataGridTextColumn Header="实际用时" Binding="{Binding ActualTime}" FontSize="18" />
-                        <controls:DataGridTextColumn Header="游戏时间" Binding="{Binding PlayTime}" FontSize="18" />
-                    </controls:DataGrid.Columns>
-                </controls:DataGrid>
-            </StackPanel>
-        </Grid>
-    </StackPanel>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </controls:DataGrid.ColumnHeaderStyle>
+                        <controls:DataGrid.Columns>
+                            <controls:DataGridTextColumn x:Uid="Rank" Header="排名" Binding="{Binding Rank}" FontSize="18" />
+                            <controls:DataGridTextColumn x:Uid="Player" Header="玩家" Binding="{Binding Player}" FontSize="18" Visibility="Collapsed"/>
+                            <controls:DataGridTextColumn x:Uid="Score" Header="分数" Binding="{Binding Score}" FontSize="18" />
+                            <controls:DataGridTextColumn x:Uid="Level" Header="难度" Binding="{Binding LevelDescription}" FontSize="18" />
+                            <controls:DataGridTextColumn x:Uid="AvailableTime" Header="可用时间" Binding="{Binding AvailableTime}" FontSize="18" />
+                            <controls:DataGridTextColumn x:Uid="ActualTime" Header="实际用时" Binding="{Binding ActualTime}" FontSize="18" />
+                            <controls:DataGridTextColumn x:Uid="PlayTime" Header="游戏时间" Binding="{Binding PlayTime}" FontSize="18" />
+                        </controls:DataGrid.Columns>
+                    </controls:DataGrid>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
 </Page>

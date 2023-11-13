@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActualTime.Header" xml:space="preserve">
+    <value>实际用时</value>
+  </data>
+  <data name="AvailableTime.Header" xml:space="preserve">
+    <value>可用时间</value>
+  </data>
   <data name="BackToMenu" xml:space="preserve">
     <value>返回主菜单</value>
   </data>
@@ -126,13 +132,13 @@
   <data name="Confirm" xml:space="preserve">
     <value>确认</value>
   </data>
-  <data name="CustomDifficulty.Content" xml:space="preserve">
+  <data name="Custom.Content" xml:space="preserve">
     <value>自定义</value>
   </data>
   <data name="CustomSettingAlert" xml:space="preserve">
     <value>所选的行和列的乘积不能为奇数，那样的话最后就会剩下一个按钮找不到伴哦！</value>
   </data>
-  <data name="EasyDifficulty.Content" xml:space="preserve">
+  <data name="Easy.Content" xml:space="preserve">
     <value>简单</value>
   </data>
   <data name="FailPrompt" xml:space="preserve">
@@ -144,7 +150,7 @@
   <data name="GameName.Text" xml:space="preserve">
     <value>你的连连看</value>
   </data>
-  <data name="HardDifficulty.Content" xml:space="preserve">
+  <data name="Hard.Content" xml:space="preserve">
     <value>困难</value>
   </data>
   <data name="Hint.Content" xml:space="preserve">
@@ -153,8 +159,20 @@
   <data name="Hint_MainMenuPage.Text" xml:space="preserve">
     <value>选择难度，开始游戏：</value>
   </data>
-  <data name="MediumDifficulty.Content" xml:space="preserve">
+  <data name="Level.Header" xml:space="preserve">
+    <value>难度</value>
+  </data>
+  <data name="Medium.Content" xml:space="preserve">
     <value>中等</value>
+  </data>
+  <data name="Player.Header" xml:space="preserve">
+    <value>玩家</value>
+  </data>
+  <data name="PlayTime.Header" xml:space="preserve">
+    <value>游戏时间</value>
+  </data>
+  <data name="Rank.Header" xml:space="preserve">
+    <value>排名</value>
   </data>
   <data name="RankingListTile.Text" xml:space="preserve">
     <value>排行榜</value>
@@ -173,6 +191,9 @@
   </data>
   <data name="RowColumnLinkText" xml:space="preserve">
     <value>和</value>
+  </data>
+  <data name="Score.Header" xml:space="preserve">
+    <value>分数</value>
   </data>
   <data name="StartGame.Content" xml:space="preserve">
     <value>开始游戏</value>

@@ -92,12 +92,11 @@ namespace Lianliankan_WinUI.Pages
                 dialog.PrimaryButtonText = confirm;
                 dialog.DefaultButton = ContentDialogButton.Primary;
 
-
                 var _ = await dialog.ShowAsync();
                 return;
             }
 
-            Frame.Navigate(typeof(GameWindowPage),new GameOptions() {UserSetRows = userSetRows, UserSetColumns= userSetColumns });
+            Frame.Navigate(typeof(GameWindowPage),new GameOptions() {UserSetRows = userSetRows, UserSetColumns= userSetColumns, GameLevels = GameLevels.Custom });
         }
         private void ReturnToMenu_Click(object sender, RoutedEventArgs e)
         {
