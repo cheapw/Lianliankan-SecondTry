@@ -1,1 +1,1 @@
-The application is fully standalone, no data will be transfer to internet location.
+No data to collect,  if I remove the tag <rescap:Capability Name="runFullTrust" /> from Package.appxmanifest, the app could not be start.
