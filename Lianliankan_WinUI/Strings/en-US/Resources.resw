@@ -120,6 +120,9 @@
   <data name="ActualTime.Header" xml:space="preserve">
     <value>Time Consumed</value>
   </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Your Link Game</value>
+  </data>
   <data name="AvailableTime.Header" xml:space="preserve">
     <value>Time Available</value>
   </data>

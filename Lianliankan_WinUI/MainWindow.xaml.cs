@@ -1,3 +1,5 @@
+using Lianliankan_WinUI.Models;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -12,6 +14,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinRT.Interop;
+using Microsoft.UI.Windowing; // Needed for AppWindow.
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,14 +27,25 @@ namespace Lianliankan_WinUI
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        private AppWindow m_AppWindow;
         public MainWindow()
         {
             this.InitializeComponent();
+            var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+            //this.Title = resourceLoader.GetString("GameName/Text");
+            //ExtendsContentIntoTitleBar = true;
+            //this.SetTitleBar(AppTitleBar);
+            m_AppWindow = GetAppWindowForCurrentWindow();
+            m_AppWindow.Title = resourceLoader.GetString("GameName/Text");
+            m_AppWindow.SetIcon("Assets/Icons/AppBarIcon.ico");
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private AppWindow GetAppWindowForCurrentWindow()
         {
-            myButton.Content = "Clicked";
+            IntPtr hWnd = WindowNative.GetWindowHandle(this);
+            WindowId wndId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            return AppWindow.GetFromWindowId(wndId);
         }
+
     }
 }

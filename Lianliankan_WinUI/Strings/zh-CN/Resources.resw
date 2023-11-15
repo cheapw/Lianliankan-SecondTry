@@ -120,6 +120,9 @@
   <data name="ActualTime.Header" xml:space="preserve">
     <value>实际用时</value>
   </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>你的连连看</value>
+  </data>
   <data name="AvailableTime.Header" xml:space="preserve">
     <value>可用时间</value>
   </data>

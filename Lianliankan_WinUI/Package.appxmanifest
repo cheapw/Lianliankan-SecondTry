@@ -36,7 +36,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Lianliankan_WinUI"
+        DisplayName="ms-resource:AppDisplayName"
         Description="Lianliankan_WinUI"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
@@ -61,7 +61,6 @@
   </Applications>
 
   <Capabilities>
-	  <rescap:Capability Name="runFullTrust" />
-    <Capability Name="internetClient"/></Capabilities>
+	  <rescap:Capability Name="runFullTrust" /></Capabilities>
 
 </Package>
