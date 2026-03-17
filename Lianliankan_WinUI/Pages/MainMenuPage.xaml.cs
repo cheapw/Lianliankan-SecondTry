@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -101,7 +102,7 @@ namespace Lianliankan_WinUI.Pages
             // 自定义难度跳转到自定义窗口
             if ((string)((sender as Button).Tag) == "3")
             {
-                Frame.Navigate(typeof(DifficultySettingPage));
+                Frame.Navigate(typeof(DifficultySettingPage), null, new DrillInNavigationTransitionInfo());
                 return;
             }
 
@@ -110,7 +111,7 @@ namespace Lianliankan_WinUI.Pages
                 UserSetRows = userSetRows,
                 UserSetColumns = userSetColumns,
                 GameLevels = gameLevels
-            });
+            }, new DrillInNavigationTransitionInfo());
         }
 
         private void Window_Closed(object sender, EventArgs e)

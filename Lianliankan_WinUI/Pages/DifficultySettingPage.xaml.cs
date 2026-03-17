@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace Lianliankan_WinUI.Pages
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainMenuPage));
+            Frame.Navigate(typeof(MainMenuPage),null, new DrillInNavigationTransitionInfo());
         }
 
         private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -96,11 +97,11 @@ namespace Lianliankan_WinUI.Pages
                 return;
             }
 
-            Frame.Navigate(typeof(GameWindowPage),new GameOptions() {UserSetRows = userSetRows, UserSetColumns= userSetColumns, GameLevels = GameLevels.Custom });
+            Frame.Navigate(typeof(GameWindowPage),new GameOptions() {UserSetRows = userSetRows, UserSetColumns= userSetColumns, GameLevels = GameLevels.Custom }, new DrillInNavigationTransitionInfo());
         }
         private void ReturnToMenu_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainMenuPage));
+            Frame.Navigate(typeof(MainMenuPage),null, new DrillInNavigationTransitionInfo());
         }
 
         #region 用户自定义方法

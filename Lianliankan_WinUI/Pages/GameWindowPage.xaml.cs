@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -307,7 +308,7 @@ namespace Lianliankan_WinUI.Pages
             }
             else
             {
-                throw new Exception("改按钮的容器控件不是Grid，无法获取其所在的行！");
+                throw new Exception("该按钮的容器控件不是Grid，无法获取其所在的行！");
             }
             return row;
         }
@@ -2976,7 +2977,7 @@ namespace Lianliankan_WinUI.Pages
             //Application.Current.MainWindow.Show();
             //IsWantToExitApp = false;
             //this.Close();
-            Frame.Navigate(typeof(MainMenuPage));
+            Frame.Navigate(typeof(MainMenuPage),null, new DrillInNavigationTransitionInfo());
         }
 
         private void Restart_Click(object sender, RoutedEventArgs e)
