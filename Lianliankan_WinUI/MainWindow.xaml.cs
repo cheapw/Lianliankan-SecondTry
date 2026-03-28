@@ -27,25 +27,13 @@ namespace Lianliankan_WinUI
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        private AppWindow m_AppWindow;
         public MainWindow()
         {
             this.InitializeComponent();
+
             var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
-            //this.Title = resourceLoader.GetString("GameName/Text");
-            //ExtendsContentIntoTitleBar = true;
-            //this.SetTitleBar(AppTitleBar);
-            m_AppWindow = GetAppWindowForCurrentWindow();
-            m_AppWindow.Title = resourceLoader.GetString("GameName/Text");
-            m_AppWindow.SetIcon("Assets/Icons/AppBarIcon.ico");
+            this.AppWindow.Title = resourceLoader.GetString("GameName/Text");
+            this.AppWindow.SetIcon("Assets/Icons/AppBarIcon.ico");
         }
-
-        private AppWindow GetAppWindowForCurrentWindow()
-        {
-            IntPtr hWnd = WindowNative.GetWindowHandle(this);
-            WindowId wndId = Win32Interop.GetWindowIdFromWindow(hWnd);
-            return AppWindow.GetFromWindowId(wndId);
-        }
-
     }
 }
