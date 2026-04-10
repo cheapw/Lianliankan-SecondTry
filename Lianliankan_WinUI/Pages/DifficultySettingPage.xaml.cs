@@ -1,4 +1,9 @@
+using CommunityToolkit.Common;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.Mvvm.Messaging;
+using Lianliankan_WinUI.Messages;
 using Lianliankan_WinUI.Models;
+using Lianliankan_WinUI.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -31,78 +36,34 @@ namespace Lianliankan_WinUI.Pages
         public DifficultySettingPage()
         {
             this.InitializeComponent();
-        }
+            this.DataContext = Ioc.Default.GetRequiredService<DifficultySettingViewModel>();
 
-        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainMenuPage),null, new DrillInNavigationTransitionInfo());
-        }
-
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
-        {
-            if(verticalSlider!=null && horizontalSlider != null && ShowPad!=null)
+            WeakReferenceMessenger.Default.Register<WrongRowColumnSetPromptMessage>(this, async(r, m) =>
             {
-                this.ShowPad.Visibility = Visibility.Visible;
-                this.OperationPad.Visibility = Visibility.Collapsed;
+				var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
+				var systemPrompts = resourceLoader.GetString("SystemPrompts");
+				var confirm = resourceLoader.GetString("Confirm");
+				var customSettingAlert = resourceLoader.GetString("CustomSettingAlert");
 
-                FillGridNew((int)verticalSlider.Value, (int)horizontalSlider.Value);
-                //Task.Run(() =>
-                //{
-                //    this.DispatcherQueue.TryEnqueue(() =>
-                //    {
-                //        FillGridNew((int)verticalSlider.Value, (int)horizontalSlider.Value);
-                //    });
-                //});
-            }
-        }
+				ContentDialog dialog = new ContentDialog();
 
-        private void Slider_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            this.ShowPad.Visibility = Visibility.Collapsed;
-            this.OperationPad.Visibility = Visibility.Visible;
+				// XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+				dialog.XamlRoot = this.XamlRoot;
+				dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+				dialog.Title = systemPrompts;
+				dialog.Content = customSettingAlert;
+				dialog.PrimaryButtonText = confirm;
+				dialog.DefaultButton = ContentDialogButton.Primary;
 
-            var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
-            var gameCustomHint = resourceLoader.GetString("GameCustomHintText");
-            var row = resourceLoader.GetString("Row");
-            var column = resourceLoader.GetString("Column");
-            var rowColumnLinkText = resourceLoader.GetString("RowColumnLinkText");
-
-            this.TbkGameDifficulty.Text = $"{gameCustomHint} {(int)verticalSlider.Value} {row} {rowColumnLinkText} {(int)horizontalSlider.Value} {column}!";
-        }
-
-        private async void StartGame_Click(object sender, RoutedEventArgs e)
-        {
-            int userSetRows, userSetColumns;
-            userSetRows = (int)verticalSlider.Value;
-            userSetColumns = (int)horizontalSlider.Value;
-
-            if (userSetRows * userSetColumns % 2 == 1)
-            {
-                var resourceLoader = new Microsoft.Windows.ApplicationModel.Resources.ResourceLoader();
-                var systemPrompts = resourceLoader.GetString("SystemPrompts");
-                var confirm = resourceLoader.GetString("Confirm");
-                var customSettingAlert = resourceLoader.GetString("CustomSettingAlert");
-
-                ContentDialog dialog = new ContentDialog();
-
-                // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
-                dialog.XamlRoot = this.XamlRoot;
-                dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                dialog.Title = systemPrompts;
-                dialog.Content = customSettingAlert;
-                dialog.PrimaryButtonText = confirm;
-                dialog.DefaultButton = ContentDialogButton.Primary;
-
-                var _ = await dialog.ShowAsync();
-                return;
-            }
-
-            Frame.Navigate(typeof(GameWindowPage),new GameOptions() {UserSetRows = userSetRows, UserSetColumns= userSetColumns, GameLevels = GameLevels.Custom }, new DrillInNavigationTransitionInfo());
-        }
-        private void ReturnToMenu_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainMenuPage),null, new DrillInNavigationTransitionInfo());
-        }
+				var _ = await dialog.ShowAsync();
+				return;
+			});
+			WeakReferenceMessenger.Default.Register<DifficultySliderChangeMessage>(this, async (r, m) =>
+			{
+				if (verticalSlider.IsLoaded && horizontalSlider.IsLoaded && verticalSlider != null && horizontalSlider != null && ShowPad != null)
+					FillGridNew(m.Rows, m.Columns);
+			});
+		}
 
         #region 用户自定义方法
         private Button CreateButton(int row, int column)

@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using Lianliankan_WinUI.Models;
 using Lianliankan_WinUI.Pages;
+using Lianliankan_WinUI.Services;
+using Lianliankan_WinUI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
@@ -26,7 +28,8 @@ namespace Lianliankan_WinUI
     /// </summary>
     public partial class App : Application
     {
-        private Windows.Graphics.SizeInt32 m_InitialSize;
+        public readonly INavigationService NavigationService;
+		private Windows.Graphics.SizeInt32 m_InitialSize;
         private readonly int m_RowFactor = 9;
         private readonly int m_ColumnFactor = 12;
         /// <summary>
@@ -36,7 +39,7 @@ namespace Lianliankan_WinUI
         public App()
         {
             ConfigureServices();
-
+            NavigationService = Ioc.Default.GetRequiredService<INavigationService>();
 			this.InitializeComponent();
         }
 
@@ -56,6 +59,8 @@ namespace Lianliankan_WinUI
 
             rootFrame.Navigating += RootFrame_Navigating;
 
+			rootFrame.Navigated += RootFrame_Navigated;
+
             // Navigate to the first page, configuring the new page
             // by  passing required information as a navigation parameter
             rootFrame.Navigate(typeof(MainMenuPage), args.Arguments, new DrillInNavigationTransitionInfo());
@@ -69,23 +74,36 @@ namespace Lianliankan_WinUI
             }
 			// Ensure the MainWindow is active
 			m_window.Activate();
-        }
 
-        private void RootFrame_Navigating(object sender, NavigatingCancelEventArgs e)
-        {
-            var parameter = e.Parameter;
+            // 注册页面（关联 Key 与 Page 类型)
+            NavigationService.RegisterPage(nameof(MainMenuPage), typeof(MainMenuPage));
+            NavigationService.RegisterPage(nameof(DifficultySettingPage), typeof(DifficultySettingPage));
+            NavigationService.RegisterPage(nameof(GameWindowPage), typeof(GameWindowPage));
+
+			// 初始化 Frame（假设 MainWindow 包含名为 rootFrame 的 Frame）
+			NavigationService.Initialize(rootFrame);
+		}
+
+		private void RootFrame_Navigated(object sender, NavigationEventArgs e)
+		{
+			var parameter = e.Parameter;
 			var displayArea = DisplayArea.GetFromWindowId(this.m_window.AppWindow.Id, DisplayAreaFallback.Nearest);
 
 			if (parameter is GameOptions gameOptions)
-            {
-                this.m_window.AppWindow.Resize(new Windows.Graphics.SizeInt32((int)Math.Min(displayArea.WorkArea.Width,Math.Round(m_InitialSize.Width * ((double)gameOptions.UserSetColumns / m_ColumnFactor))), (int)Math.Min(displayArea.WorkArea.Height,Math.Round(m_InitialSize.Height * ((double)gameOptions.UserSetRows / m_RowFactor)))));
-            }
-            else
-            {
-                this.m_window.AppWindow.Resize(m_InitialSize);
-            }
+			{
+				this.m_window.AppWindow.Resize(new Windows.Graphics.SizeInt32((int)Math.Min(displayArea.WorkArea.Width, Math.Round(m_InitialSize.Width * ((double)gameOptions.UserSetColumns / m_ColumnFactor))), (int)Math.Min(displayArea.WorkArea.Height, Math.Round(m_InitialSize.Height * ((double)gameOptions.UserSetRows / m_RowFactor)))));
+			}
+			else
+			{
+				this.m_window.AppWindow.Resize(m_InitialSize);
+			}
 
 			this.m_window.AppWindow.Move(new PointInt32((displayArea.WorkArea.Width - this.m_window.AppWindow.Size.Width) / 2, (displayArea.WorkArea.Height - this.m_window.AppWindow.Size.Height) / 2));
+		}
+
+		private void RootFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            
 
 		}
 
@@ -100,6 +118,18 @@ namespace Lianliankan_WinUI
         {
             Ioc.Default.ConfigureServices(
                 new ServiceCollection()
+                .AddSingleton<AppData>()
+
+                .AddSingleton<INavigationService, NavigationService>()
+
+                .AddSingleton<MainMenuViewModel>()
+                .AddSingleton<GameWindowViewModel>()
+                .AddSingleton<DifficultySettingViewModel>()
+
+                .AddTransient<MainMenuPage>()
+                .AddTransient<GameWindowPage>()
+                .AddTransient<DifficultySettingPage>()
+
                 .BuildServiceProvider()
             );
         }

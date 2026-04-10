@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Lianliankan_WinUI.Pages"
+    xmlns:models="using:Lianliankan_WinUI.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
@@ -74,9 +75,9 @@
     </Page.Background>
 
     <Grid>
-        <StackPanel Margin="3,3" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
-            <Button Content="CN" Margin="3" x:Name="BtnCN" Click="BtnCN_Click"/>
-            <Button Content="EN" Margin="3" x:Name="BtnEN" Click="BtnEN_Click"/>
+		<StackPanel Margin="3,3" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+			<Button Content="CN" Margin="3" x:Name="BtnCN" Command="{Binding ChangeToCNLanguageCommand}"/>
+			<Button Content="EN" Margin="3" x:Name="BtnEN" Command="{Binding ChangeToENLanguageCommand}"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Center" Margin="65,0">
             <TextBlock x:Uid="GameName" Text="你的连连看" FontSize="60" HorizontalAlignment="Center" Margin="0,0,0,35"/>
@@ -87,19 +88,14 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <TextBlock x:Uid="Hint_MainMenuPage" Text="选择难度，开始游戏：" FontSize="28" Margin="10" HorizontalAlignment="Center"/>
-                    <Button x:Uid="Easy" Content="简单" Tag="0" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                    <Button x:Uid="Medium" Content="中等" Tag="1" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                    <Button x:Uid="Hard" Content="困难" Tag="2" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                    <Button x:Uid="Custom" Content="自定义" Tag="3" Click="Button_Click"  Style="{StaticResource CustomButtonStyle}"/>
-                    <!--<TextBox x:Name="txtInput"></TextBox>
-            <TextBox x:Name="txtOutput"></TextBox>
-            <Button Content="读取" Tag="3" Click="Button_Click_1"  Style="{StaticResource CustomButtonStyle}"/>-->
-                    <!--<Button Content="写入" Tag="3" Click="Button_Click_2"  Style="{StaticResource CustomButtonStyle}"/>
-                    <Button Content="清除" Tag="3" Click="Button_Click_3"  Style="{StaticResource CustomButtonStyle}"/>-->
+					<Button x:Uid="Easy" Content="简单" Style="{StaticResource CustomButtonStyle}" Command="{Binding StartGameCommand}" CommandParameter="{x:Bind models:GameLevels.Easy}"/>
+					<Button x:Uid="Medium" Content="中等" Style="{StaticResource CustomButtonStyle}" Command="{Binding StartGameCommand}" CommandParameter="{x:Bind models:GameLevels.Medium}"/>
+					<Button x:Uid="Hard" Content="困难" Style="{StaticResource CustomButtonStyle}" Command="{Binding StartGameCommand}" CommandParameter="{x:Bind models:GameLevels.Hard}"/>
+					<Button x:Uid="Custom" Content="自定义" Style="{StaticResource CustomButtonStyle}" Command="{Binding StartGameCommand}" CommandParameter="{x:Bind models:GameLevels.Custom}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <TextBlock x:Uid="RankingListTile" Text="排行榜" FontSize="40" HorizontalAlignment="Center"/>
-                    <controls:DataGrid  x:Name="dgRank" 
+					<controls:DataGrid  x:Name="dgRank" ItemsSource="{Binding AppData.RankInfoes}"
                 Grid.Row="1"
                 Margin="12"
                 VerticalAlignment="Stretch" HorizontalAlignment="Center"

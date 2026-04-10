@@ -1,4 +1,6 @@
+using CommunityToolkit.Mvvm.DependencyInjection;
 using Lianliankan_WinUI.Models;
+using Lianliankan_WinUI.ViewModels;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -2714,20 +2716,20 @@ namespace Lianliankan_WinUI.Pages
                 
             };
 
-            var currentRank = AppData.RankInfoes.Count(x => x.Score > rankInfo.Score) + 1;
+            //var currentRank = AppData.RankInfoes.Count(x => x.Score > rankInfo.Score) + 1;
 
-            AppData.RankInfoes.Add(rankInfo);
+            //AppData.RankInfoes.Add(rankInfo);
 
-            AppData.RankInfoes = AppData.RankInfoes.OrderByDescending(x => x.Score).ToList();
+            //AppData.RankInfoes = AppData.RankInfoes.OrderByDescending(x => x.Score).ToList();
 
-            for (int i = 1; i <= AppData.RankInfoes.Count; i++)
-            {
-                AppData.RankInfoes[i-1].Rank = i;
-            }
+            //for (int i = 1; i <= AppData.RankInfoes.Count; i++)
+            //{
+            //    AppData.RankInfoes[i-1].Rank = i;
+            //}
 
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            //var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
-            localSettings.Values["RankInfoes"] = JsonSerializer.Serialize(AppData.RankInfoes.Take(10).ToList());
+            //localSettings.Values["RankInfoes"] = JsonSerializer.Serialize(AppData.RankInfoes.Take(10).ToList());
         }
         #endregion
 
@@ -2767,7 +2769,8 @@ namespace Lianliankan_WinUI.Pages
         public GameWindowPage()
         {
             this.InitializeComponent();
-        }
+			this.DataContext = Ioc.Default.GetRequiredService<GameWindowViewModel>();
+		}
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -2977,7 +2980,7 @@ namespace Lianliankan_WinUI.Pages
             //Application.Current.MainWindow.Show();
             //IsWantToExitApp = false;
             //this.Close();
-            Frame.Navigate(typeof(MainMenuPage),null, new DrillInNavigationTransitionInfo());
+            Frame.Navigate(typeof(MainMenuPage),null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
         }
 
         private void Restart_Click(object sender, RoutedEventArgs e)

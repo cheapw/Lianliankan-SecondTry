@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Lianliankan_WinUI.Models
 {
-    class AppData
+    public partial class AppData:ObservableObject
     {
-        public static List<RankInfo> RankInfoes { get; set; } = new List<RankInfo>();
+        [ObservableProperty]
+        public partial List<RankInfo> RankInfoes { get; set; } = new List<RankInfo>();
     }
 }

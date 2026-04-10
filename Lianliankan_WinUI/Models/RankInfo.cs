@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lianliankan_WinUI.Models
 {
-    class RankInfo
+    public class RankInfo
     {
         public string Player { get; set; }
         public int Rank { get; set; }

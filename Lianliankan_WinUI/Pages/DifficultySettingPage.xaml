@@ -3,13 +3,18 @@
     x:Class="Lianliankan_WinUI.Pages.DifficultySettingPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:CommunityToolkit.WinUI.Converters"
+    xmlns:lc="using:Lianliankan_WinUI.Converters"
     xmlns:local="using:Lianliankan_WinUI.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
      Background="Azure">
     <Page.Resources>
-        <Style x:Key="GradientButtonStyle" TargetType="Button">
+		<converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+		<lc:InversedBoolToVisibilityConverter x:Key="InversedBoolToVisibilityConverter"/>
+		<Style x:Key="GradientButtonStyle" TargetType="Button">
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -60,17 +65,36 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Slider x:Name="horizontalSlider" Grid.Column="1" 
+		<Slider x:Name="horizontalSlider" Grid.Column="1" 
             Orientation="Horizontal" HorizontalAlignment="Stretch" 
-            SnapsTo="Ticks" Minimum="1" Maximum="20" 
-            TickPlacement="Outside"  TickFrequency="1" Tag="1"  ValueChanged="Slider_ValueChanged" PointerExited="Slider_PointerExited" 
-             />
-        <Slider x:Name="verticalSlider"  Margin="10, 0, 0, 0" Grid.Row="1" Orientation="Vertical" IsDirectionReversed="True"
-             VerticalAlignment="Stretch" Tag="2" 
+            SnapsTo="Ticks" Minimum="1" Maximum="20" Value="{Binding HorizontalSliderValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            TickPlacement="Outside"  TickFrequency="1" Tag="1" >
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="PointerExited">
+					<i:InvokeCommandAction 
+                        Command="{Binding PointerExitFromSliderOrGamePadCommand}"/>
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</Slider>
+		<Slider x:Name="verticalSlider"  Margin="10, 0, 0, 0" Grid.Row="1" Orientation="Vertical" IsDirectionReversed="True"
+             VerticalAlignment="Stretch" Tag="2" Value="{Binding VerticalSliderValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
             Minimum="1" Maximum="12" 
-            TickPlacement="Outside" TickFrequency="1" ValueChanged="Slider_ValueChanged" PointerExited="Slider_PointerExited"/>
-        <Grid x:Name="ShowPad" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" PointerEntered="Slider_PointerExited">
-            <Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="45" Height="35" BorderThickness="0" Style="{StaticResource GradientButtonStyle}">
+            TickPlacement="Outside" TickFrequency="1" >
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="PointerExited">
+					<i:InvokeCommandAction 
+                        Command="{Binding PointerExitFromSliderOrGamePadCommand}"/>
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</Slider>
+		<Grid x:Name="ShowPad" Visibility="{Binding ShowPadVisible,Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" >
+			<i:Interaction.Behaviors>
+				<i:EventTriggerBehavior EventName="PointerExited">
+					<i:InvokeCommandAction 
+                        Command="{Binding PointerExitFromSliderOrGamePadCommand}"/>
+				</i:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+			<Button VerticalAlignment="Center" HorizontalAlignment="Center" Width="45" Height="35" BorderThickness="0" Style="{StaticResource GradientButtonStyle}">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFF0BBF0" Offset="0"/>
@@ -79,7 +103,7 @@
                 </Button.Background>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             </Button>
         </Grid>
-        <Grid x:Name="OperationPad" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+		<Grid x:Name="OperationPad" Visibility="{Binding ShowPadVisible, Converter={StaticResource InversedBoolToVisibilityConverter}}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" d:Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -89,10 +113,10 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="TbkGameDifficulty" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource textBlockStyle}"></TextBlock>
+			<TextBlock x:Name="TbkGameDifficulty" Text="{Binding GameDifficultyText}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource textBlockStyle}"></TextBlock>
             <TextBlock x:Uid="StartGameHintText" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="马上开始游戏吧!" Style="{StaticResource textBlockStyle}"></TextBlock>
-            <Button x:Uid="Return" Grid.Row="2" Grid.Column="0" Content="返回主菜单" Click="ReturnToMenu_Click" Style="{StaticResource CustomButtonStyle}"></Button>
-            <Button x:Uid="StartGame" Grid.Row="2" Grid.Column="1" Content="开始游戏" Click="StartGame_Click" Style="{StaticResource CustomButtonStyle}"></Button>
+			<Button x:Uid="Return" Grid.Row="2" Grid.Column="0" Content="返回主菜单" Command="{Binding ReturnToMenuCommand}" Style="{StaticResource CustomButtonStyle}"></Button>
+			<Button x:Uid="StartGame" Grid.Row="2" Grid.Column="1" Content="开始游戏" Command="{Binding StartGameCommand}" Style="{StaticResource CustomButtonStyle}"></Button>
         </Grid>
     </Grid>
 </Page>
